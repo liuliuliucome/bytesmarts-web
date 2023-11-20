@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allHomes, allPosts } from "contentlayer/generated";
+import { allDocs, allHomes } from "contentlayer/generated";
 import { Mdx } from "@/components/mdx-components";
 import { LocalesUtil } from "@/utils";
 import { find } from "lodash";
@@ -42,9 +42,9 @@ export default async function Home({ params }: Page.BaseStaticParams) {
 
   return (
     <div className="prose dark:prose-invert">
-      {allPosts.map((post) => (
+      {allDocs.map((post) => (
         <article key={post._id}>
-          <Link href={post.slug}>
+          <Link locale={post.locale} href={post.slug}>
             <h2>{post.title}</h2>
           </Link>
           {post.description && <p>{post.description}</p>}

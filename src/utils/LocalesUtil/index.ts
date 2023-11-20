@@ -1,9 +1,10 @@
 import workConfig from "config/workConfig";
 import { isString } from "lodash";
 
-const { locales, defaultLocale } = workConfig.i18n;
-
 export type LocalType = (typeof locales)[number];
+
+const { locales, defaultLocale } = workConfig.i18n;
+const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
 
 export class LocalesUtil {
   static toLocale(lang: string | undefined): LocalType {
@@ -25,5 +26,10 @@ export class LocalesUtil {
     }
 
     return defaultLocale;
+  }
+
+  static getLocaleUrl(slugAsParams: string) {
+    const hasLocale = localUrlReg.test(slugAsParams);
+    return hasLocale ? slugAsParams.replace(localUrlReg, "") : slugAsParams;
   }
 }

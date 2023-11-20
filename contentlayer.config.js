@@ -44,6 +44,10 @@ export const Page = defineDocumentType(() => ({
     description: {
       type: "string",
     },
+    locale: {
+      type: "string",
+      required: true,
+    },
   },
   computedFields,
 }));
@@ -68,7 +72,28 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const Docs = defineDocumentType(() => ({
+  name: "Docs",
+  filePathPattern: `docs/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    locale: {
+      type: "string",
+      required: true,
+    },
+
+    description: {
+      type: "string",
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Post, Page, Home],
+  documentTypes: [Post, Page, Home, Docs],
 });
