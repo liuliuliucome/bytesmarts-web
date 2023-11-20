@@ -1,0 +1,36 @@
+{
+  "eslint.enable": true, // 开启eslint检查
+  "editor.codeActionsOnSave": {
+    // 使用eslint来fix，包括格式化会自动fix和代码质量检查会给出错误提示
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "prettier.requireConfig": true,
+  "prettier.endOfLine": "lf",
+  "[scss]": {
+    "tailwindCSS.suggestions": true,
+    "editor.formatOnSave": false
+  },
+  "editor.tabSize": 2,
+  "tailwindCSS.rootFontSize": 10,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "wrapperClassName",
+    "bodyClassName"
+  ]
+  // "workbench.activityBar.visible": true,
+  // "eslint.codeAction.showDocumentation": {
+  //   "enable": true
+  // },
+  // "window.zoomLevel": 2,
+  // //-----------------------------新增加的配置---------------------------------
+  // //关闭VSCode在Save时候自动格式化，因为VSCode自带的格式化和ESlint规范并不兼容
+  // "editor.formatOnSave": false,
+  // //代码保存时，自动执行ESlint格式化代码
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": true,
+  // },
+  // 配置 ESLint 检查的文件类型
+  //"eslint.validate": ["javascript","vue","html"]
+}
