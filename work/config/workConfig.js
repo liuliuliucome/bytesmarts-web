@@ -1,5 +1,4 @@
 const pkg = require("package.json");
-
 const env = (val, defaultV = "") => val || defaultV;
 /**
  * @type {Readonly<Array<'zh' | 'en'>>}

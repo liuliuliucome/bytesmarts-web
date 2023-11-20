@@ -5,8 +5,9 @@
 /* 为了重置 10px */
 @layer base {
   html {
-    font-size: 10px;
+    font-size: 16px;
   }
+
   body {
     @apply font-Poppins bg-primary text-text-primary text-base;
   }
