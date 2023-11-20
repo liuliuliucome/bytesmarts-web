@@ -1,4 +1,4 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -10,7 +10,27 @@ const computedFields = {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
   },
-}
+};
+
+export const Home = defineDocumentType(() => ({
+  name: "home",
+  filePathPattern: `home/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    locale: {
+      type: "string",
+      required: true,
+    },
+
+    description: {
+      type: "string",
+    },
+  },
+}));
 
 export const Page = defineDocumentType(() => ({
   name: "Page",
@@ -26,7 +46,7 @@ export const Page = defineDocumentType(() => ({
     },
   },
   computedFields,
-}))
+}));
 
 export const Post = defineDocumentType(() => ({
   name: "Post",
@@ -40,15 +60,15 @@ export const Post = defineDocumentType(() => ({
     description: {
       type: "string",
     },
-    date: {
-      type: "date",
-      required: true,
-    },
+    // date: {
+    //   type: "date",
+    //   required: true,
+    // },
   },
   computedFields,
-}))
+}));
 
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Post, Page],
-})
+  documentTypes: [Post, Page, Home],
+});

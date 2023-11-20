@@ -1,10 +1,9 @@
-import { allPosts } from "contentlayer/generated";
 import Link from "next/link";
-import { allPages } from "contentlayer/generated";
+import { allHomes, allPosts } from "contentlayer/generated";
 import { Mdx } from "@/components/mdx-components";
 
 async function getIndexPage() {
-  const page = allPages.find((page) => page.slugAsParams === "index");
+  const page = allHomes.find((page) => page.locale === "zh");
 
   if (!page) {
     null;
@@ -28,6 +27,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const page = await getIndexPage();
+  console.log("page", page);
 
   return (
     <div className="prose dark:prose-invert">
