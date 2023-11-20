@@ -2,7 +2,7 @@ const pkg = require("package.json");
 
 const env = (val, defaultV = "") => val || defaultV;
 /**
- * @type {Array<'zh' | 'en'>}
+ * @type {Readonly<Array<'zh' | 'en'>>}
  */
 const locales = ["zh", "en"];
 

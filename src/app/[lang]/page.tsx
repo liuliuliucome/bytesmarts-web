@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { allHomes, allPosts } from "contentlayer/generated";
 import { Mdx } from "@/components/mdx-components";
+import { LocalesUtil } from "@/utils";
+import { find } from "lodash";
 
-async function getIndexPage() {
-  const page = allHomes.find((page) => page.locale === "zh");
+async function getIndexPage(lang: any) {
+  const page = find(allHomes, ["locale", LocalesUtil.toLocale(lang)]);
 
   if (!page) {
     null;
@@ -12,8 +14,16 @@ async function getIndexPage() {
   return page;
 }
 
-export async function generateMetadata() {
-  const page = await getIndexPage();
+export async function generateStaticParams() {
+  return LocalesUtil.getLocalesList().map((page) => {
+    return { lang: page };
+  });
+}
+
+export async function generateMetadata({ params }: Page.BaseStaticParams) {
+  console.log("params", params);
+
+  const page = await getIndexPage(params.lang);
 
   if (!page) {
     return {};
@@ -25,8 +35,9 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Home() {
-  const page = await getIndexPage();
+export default async function Home({ params }: Page.BaseStaticParams) {
+  const page = await getIndexPage(params.lang);
+
   console.log("page", page);
 
   return (
