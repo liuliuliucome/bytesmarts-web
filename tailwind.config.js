@@ -54,7 +54,7 @@ const config = {
   plugins: [
     plugin(({ addBase }) => {
       addBase({
-        html: { fontSize: "16px" },
+        html: { fontSize: "10px" },
       });
     }),
     require("@tailwindcss/typography"),

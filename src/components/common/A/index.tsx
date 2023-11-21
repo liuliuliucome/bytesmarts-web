@@ -1,9 +1,5 @@
-"use client";
-
 import Link, { LinkProps } from "next/link";
 import { forwardRef, useMemo } from "react";
-import { isNil, isString } from "lodash";
-import { useApp } from "@/components/app-provider";
 
 type BaseLinkProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,

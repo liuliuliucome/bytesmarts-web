@@ -44,7 +44,7 @@ export const Container: FC<any> = ({ children, ...customMeta }) => {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </Head> */}
       {/* <SearchProvider> */}
-      {/* <MainNavigation /> */}
+      <MainNavigation />
       <div className="flex min-h-screen flex-col justify-between">
         <main className="relative pt-16" style={{ scrollPaddingTop: "150px" }}>
           {children}

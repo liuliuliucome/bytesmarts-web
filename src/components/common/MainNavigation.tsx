@@ -1,12 +1,10 @@
-import { useKBar } from "kbar";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { FC, useState } from "react";
 import { isExternalUrl } from "../../utils/helpers";
-import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
 import { Icon, IconName } from "./Icon";
 import { Label } from "./Label";
 import { Logo } from "./Logo";
+import { A } from "./A";
 
 const navLinks: Array<{ label: string; url: string }> = [
   { label: "Documentation", url: "/docs" },
@@ -15,7 +13,7 @@ const navLinks: Array<{ label: string; url: string }> = [
   // { label: 'Blog', url: '/blog' },
   //
   // NOTE until we have a proper example overview page and multiple examples, link directly to Next.js example
-  { label: "Examples", url: "/examples/nextjs" },
+  // { label: "Examples", url: "/examples/nextjs" },
 ];
 
 const iconLinks: Array<{ label: string; icon: IconName; url: string }> = [
@@ -33,11 +31,11 @@ const NavLink: FC<{
   icon?: IconName;
   url: string;
 }> = ({ label, hideLabel = false, icon, url }) => {
-  const router = useRouter();
-  const active = router.pathname.split("/")[1] == url.replace("/", "");
+  const pathname = usePathname();
+  const active = pathname.split("/")[1] == url.replace("/", "");
 
   return (
-    <Link
+    <A
       href={url}
       className={`group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none ${
         active
@@ -53,19 +51,16 @@ const NavLink: FC<{
         </span>
       )}
       {label && <span className={hideLabel ? "sr-only" : ""}>{label}</span>}
-    </Link>
+    </A>
   );
 };
 
 export const SearchButton: FC<{ showShortcut?: boolean }> = ({
   showShortcut = true,
 }) => {
-  const { query } = useKBar();
-
   return (
     <button
       aria-label="Search"
-      onClick={query.toggle}
       className="flex items-center h-8 px-2 text-sm border border-gray-200 rounded-md cursor-text bg-gray-50 hover:border-gray-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800"
     >
       <span className="block w-3 mr-2">
@@ -84,13 +79,13 @@ export const MainNavigation = () => {
     <header className="fixed z-50 w-full bg-white border-b border-gray-200 bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
       <div className="flex items-center justify-between w-full h-16 px-4 mx-auto max-w-screen-2xl md:px-8 lg:px-16">
         <div className="flex items-center space-x-2.5">
-          <Link
+          <A
             href="/"
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
           >
             <Logo />
             <span className="-mt-0.5">Contentlayer</span>
-          </Link>
+          </A>
           <Label text="Beta" />
         </div>
         <div className="lg:hidden">
@@ -120,17 +115,6 @@ export const MainNavigation = () => {
                     />
                   ))}
                 </div>
-                <div className="flex items-center justify-end pt-8 space-x-4">
-                  {iconLinks.map(({ label, icon, url }, index) => (
-                    <NavLink
-                      key={index}
-                      label={label}
-                      hideLabel
-                      url={url}
-                      icon={icon}
-                    />
-                  ))}
-                </div>
               </nav>
             </div>
           )}
@@ -149,18 +133,7 @@ export const MainNavigation = () => {
               <SearchButton />
             </div>
           </div>
-          <div className="flex items-center pl-2 lg:space-x-2 lg:pl-8">
-            <ColorSchemeSwitcher />
-            {iconLinks.map(({ label, icon, url }, index) => (
-              <NavLink
-                key={index}
-                label={label}
-                hideLabel
-                url={url}
-                icon={icon}
-              />
-            ))}
-          </div>
+          {/* <ColorSchemeSwitcher /> */}
         </nav>
       </div>
     </header>

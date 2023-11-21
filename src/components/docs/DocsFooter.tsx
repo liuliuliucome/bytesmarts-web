@@ -2,12 +2,12 @@ import { FC } from "react";
 import Link from "next/link";
 import { Icon } from "../common/Icon";
 import { format } from "date-fns";
-import { Doc } from "contentlayer/generated";
+import { Docs } from "contentlayer/generated";
 
 const githubBranch = "main";
 const githubBaseUrl = `https://github.com/contentlayerdev/website/blob/${githubBranch}/content/`;
 
-export const DocsFooter: FC<{ doc: Doc }> = ({ doc }) => {
+export const DocsFooter: FC<{ doc: Docs }> = ({ doc }) => {
   return (
     <>
       <hr />

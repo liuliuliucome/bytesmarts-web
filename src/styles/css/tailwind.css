@@ -5,7 +5,7 @@
 /* 为了重置 10px */
 @layer base {
   html {
-    font-size: 16px;
+    font-size: 10px;
   }
 
   body {
