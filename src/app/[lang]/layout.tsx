@@ -1,9 +1,6 @@
 import "@/styles/css/index.css";
 import "@/styles/sass/index.scss";
-import { Inter } from "next/font/google";
 import { BaseContentLayout } from "@/components/layouts";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",

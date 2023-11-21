@@ -80,7 +80,7 @@ export const Footer: FC = () => {
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
           >
             <Logo />
-            <span>Contentlayer</span>
+            <span>Bytesmarts-web</span>
           </Link>
           <div className="mt-4 text-sm text-slate-500 dark:text-slate-400">
             {content.note}

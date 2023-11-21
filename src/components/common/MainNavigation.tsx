@@ -5,6 +5,7 @@ import { Icon, IconName } from "./Icon";
 import { Label } from "./Label";
 import { Logo } from "./Logo";
 import { A } from "./A";
+import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
 
 const navLinks: Array<{ label: string; url: string }> = [
   { label: "Documentation", url: "/docs" },
@@ -84,7 +85,7 @@ export const MainNavigation = () => {
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
           >
             <Logo />
-            <span className="-mt-0.5">Contentlayer</span>
+            <span className="-mt-0.5">Bytesmarts-web</span>
           </A>
           <Label text="Beta" />
         </div>
@@ -133,7 +134,7 @@ export const MainNavigation = () => {
               <SearchButton />
             </div>
           </div>
-          {/* <ColorSchemeSwitcher /> */}
+          <ColorSchemeSwitcher />
         </nav>
       </div>
     </header>
