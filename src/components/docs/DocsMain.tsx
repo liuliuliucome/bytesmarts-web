@@ -2,6 +2,9 @@ import { Docs } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { A } from "../common";
 import Image from "next/image";
+import { DocsLayoutProps } from "../layouts";
+import { DocsNavigation } from "./DocsNavigation";
+import { useDocsLayout } from "../layouts/DocsLayout/container";
 
 const mdxComponents = {
   // Callout,
@@ -21,8 +24,8 @@ const mdxComponents = {
   // OptionDescription,
 };
 
-export function DocsMain(props: { doc: Docs }) {
-  const { doc } = props;
+export function DocsMain() {
+  const { doc, tree } = useDocsLayout();
   const MDXContent = useMDXComponent(doc.body.code || "");
 
   return (
@@ -32,7 +35,7 @@ export function DocsMain(props: { doc: Docs }) {
         className="sticky hidden border-r border-gray-200 top-16 shrink-0 dark:border-gray-800 lg:block"
       >
         <div className="h-full p-8 pl-16 -ml-3 overflow-y-scroll">
-          {/* <DocsNavigation tree={tree} /> */}
+          <DocsNavigation tree={tree} />
         </div>
         <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-t from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
         <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
