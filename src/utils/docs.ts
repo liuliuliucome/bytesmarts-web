@@ -7,8 +7,6 @@ const withLangDocs = (lang: LocalType) =>
   allDocs.filter((item) => item.locale === lang);
 
 export function getDocsPageProps(props: Page.DocsSlugPageProps) {
-  console.log("props", props);
-
   const { params } = props;
   const lang = LocalesUtil.toLocale(params.lang);
 
