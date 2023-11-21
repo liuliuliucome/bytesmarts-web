@@ -5,6 +5,7 @@ import Image from "next/image";
 import { DocsLayoutProps } from "../layouts";
 import { DocsNavigation } from "./DocsNavigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
+import { DocsHeader } from "./DocsHeader";
 
 const Section = (props: { children: React.ReactNode }) => (
   <div>{props.children}</div>
@@ -39,14 +40,14 @@ export function DocsMain() {
         className="sticky hidden border-r border-gray-200 top-16 shrink-0 dark:border-gray-800 lg:block"
       >
         <div className="h-full p-8 pl-16 -ml-3 overflow-y-scroll">
-          <DocsNavigation tree={tree} />
+          <DocsNavigation />
         </div>
         <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-t from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
         <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
       </div>
 
       <div className="relative w-full grow">
-        {/* <DocsHeader tree={tree} breadcrumbs={breadcrumbs} title={doc.title} /> */}
+        <DocsHeader title={doc.title} />
         <div className=" text-16 w-full max-w-3xl p-4 pb-8 mx-auto mb-4 prose docs prose-slate prose-violet shrink prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-invert dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 md:mb-8 md:px-8 lg:mx-0 lg:max-w-full lg:px-16">
           {MDXContent && <MDXContent components={mdxComponents as any} />}
           {/* {doc.show_child_cards && (

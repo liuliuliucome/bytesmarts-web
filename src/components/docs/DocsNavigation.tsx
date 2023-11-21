@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { Label } from "../common/Label";
 import { Icon } from "../common/Icon";
 import { TreeNode } from "@/types/TreeNode";
+import { useDocsLayout } from "../layouts/DocsLayout/container";
 
 const NavLink: FC<{
   title: string;
@@ -121,7 +122,8 @@ const Tree: FC<{ tree: TreeNode[]; level: number; activePath: string }> = ({
   );
 };
 
-export const DocsNavigation: FC<{ tree: TreeNode[] }> = ({ tree }) => {
+export const DocsNavigation: FC = () => {
+  const { tree } = useDocsLayout();
   const router = usePathname();
   return (
     <aside className="-ml-6 w-80">

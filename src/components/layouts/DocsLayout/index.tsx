@@ -11,6 +11,7 @@ import { DocsLayoutProvider } from "./container";
 export type DocsLayoutProps = {
   doc: Docs;
   allDocs: Docs[];
+  breadcrumbs: Page.BreadcrumbType[];
   tree: TreeNode[];
 };
 

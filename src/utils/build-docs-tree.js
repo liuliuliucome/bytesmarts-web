@@ -4,7 +4,7 @@
  * @param {string} parentPathNames
  * @returns {import('@/types/TreeNode').TreeNode[]}
  */
-export const buildDocsTree = (docs, parentPath = "docs") => {
+export const buildDocsTree = (docs, parentPath = "") => {
   return docs
     .filter((item) => item.parentRoute === parentPath)
     .map((doc) => {

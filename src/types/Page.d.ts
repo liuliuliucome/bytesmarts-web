@@ -4,4 +4,18 @@ declare namespace Page {
       lang?: import("@/utils").LocalType;
     };
   };
+  interface DocsSlugPageProps {
+    params: {
+      slug: string[];
+      lang?: LocalType;
+    };
+  }
+
+  type DocsProps = {
+    params: {
+      lang?: LocalType;
+    };
+  };
+
+  type BreadcrumbType = { path: string; title: string };
 }

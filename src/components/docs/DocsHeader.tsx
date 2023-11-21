@@ -1,16 +1,15 @@
 import { FC, Fragment, useState, useEffect } from "react";
-import { TreeNode } from "types/TreeNode";
 import Link from "next/link";
 import { DocsNavigation } from "./DocsNavigation";
 import { Icon } from "../common/Icon";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
+import { useDocsLayout } from "../layouts/DocsLayout/container";
 
 export const DocsHeader: FC<{
-  tree: TreeNode[];
-  breadcrumbs: any[];
   title: string;
-}> = ({ tree, breadcrumbs, title }) => {
-  const { asPath } = useRouter();
+}> = ({ title }) => {
+  const { tree, breadcrumbs } = useDocsLayout();
+  const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [top, setTop] = useState<boolean>(true);
 
@@ -25,7 +24,7 @@ export const DocsHeader: FC<{
 
   useEffect(() => {
     setOpen(false);
-  }, [asPath]);
+  }, [pathname]);
 
   return (
     <>
@@ -86,7 +85,7 @@ export const DocsHeader: FC<{
               </button>
             </div>
             <div className="pt-4">
-              <DocsNavigation tree={tree} />
+              <DocsNavigation />
             </div>
           </div>
         </div>
