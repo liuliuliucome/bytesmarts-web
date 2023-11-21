@@ -1,7 +1,7 @@
 "use client";
 
 import { Docs } from "contentlayer/generated";
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode, useEffect } from "react";
 import { MainNavigation } from "../../common/MainNavigation";
 import { Footer } from "../../common/Footer";
 import { DocsMain } from "../../docs";
@@ -10,12 +10,16 @@ import { DocsLayoutProvider } from "./container";
 
 export type DocsLayoutProps = {
   doc: Docs;
+  allDocs: Docs[];
   tree: TreeNode[];
 };
 
 export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   const { children, ...reset } = props;
-  console.log("tree", reset.tree);
+
+  useEffect(() => {
+    console.log("alldocs", reset);
+  }, [reset]);
 
   return (
     <DocsLayoutProvider initialState={reset}>

@@ -12,7 +12,13 @@ export function BaseContentLayout(props: BaseContentProps) {
   return (
     <AppProvider initialState={{ locale }}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
+        <div
+          className={
+            "antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50"
+          }
+        >
+          {children}
+        </div>
       </ThemeProvider>
     </AppProvider>
   );

@@ -76,7 +76,7 @@ export default async function DocsPage(props: DocsProps) {
   const tree = buildDocsTree(allDocs);
 
   return (
-    <DocsLayout doc={doc} tree={tree}>
+    <DocsLayout allDocs={allDocs} doc={doc} tree={tree}>
       {/* <article className="py-6 prose dark:prose-invert">
           <h1 className="mb-2">{doc.title}</h1>
           {doc.description && (
