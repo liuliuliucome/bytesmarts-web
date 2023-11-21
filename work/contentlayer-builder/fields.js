@@ -35,6 +35,18 @@ export const computedFields = {
       return paths.join("/");
     },
   },
+  parentRoute: {
+    type: "string",
+    resolve: (doc) => {
+      const paths = doc._raw.flattenedPath.replace(localUrlReg, "").split("/");
+      if (paths[paths.length - 1] === "index") {
+        paths.pop();
+      }
+      paths.pop();
+
+      return paths.join("/");
+    },
+  },
   route: {
     type: "string",
     resolve: (doc) => {

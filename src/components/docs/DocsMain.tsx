@@ -6,22 +6,26 @@ import { DocsLayoutProps } from "../layouts";
 import { DocsNavigation } from "./DocsNavigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
 
+const Section = (props: { children: React.ReactNode }) => (
+  <div>{props.children}</div>
+);
+
 const mdxComponents = {
-  // Callout,
-  // Card,
+  Callout: Section,
+  Card: Section,
   Image,
   img: Image,
-  // Link,
-  // ChevronLink,
-  // Label,
-  // h2: H2,
-  // h3: H3,
-  // h4: H4,
+
+  ChevronLink: A,
+  Label: Section,
+  h2: Section,
+  h3: Section,
+  h4: Section,
   a: A,
   Link: A,
-  // OptionsTable,
-  // OptionTitle,
-  // OptionDescription,
+  OptionsTable: Section,
+  OptionTitle: Section,
+  OptionDescription: Section,
 };
 
 export function DocsMain() {

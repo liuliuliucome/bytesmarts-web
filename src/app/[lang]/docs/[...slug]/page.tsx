@@ -39,6 +39,8 @@ function getSupportingProps(doc: Docs, params: any) {
 
 async function getDocFromParams(props: DocsProps) {
   const { params } = props;
+  console.log("params", params);
+
   const lang = LocalesUtil.toLocale(params.lang);
   const reativeRoute = params.slug.join("/");
   const allWithLangDocs = withLangDocs(lang);
