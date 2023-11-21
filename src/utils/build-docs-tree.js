@@ -1,7 +1,7 @@
 /**
  *
  * @param {import('contentlayer/generated').Docs[]} docs
- * @param {string[]} parentPathNames
+ * @param {string} parentPathNames
  * @returns {import('@/types/TreeNode').TreeNode[]}
  */
 export const buildDocsTree = (docs, parentPath = "docs") => {
