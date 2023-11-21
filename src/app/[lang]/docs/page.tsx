@@ -37,7 +37,7 @@ export default async function Docs(params: DocsProps) {
     <div className="prose dark:prose-invert">
       {allDocWithLocale(lang).map((post) => (
         <article key={post._id}>
-          <Link locale={post.locale} href={LocalesUtil.getLocaleUrl(post.slug)}>
+          <Link locale={post.locale} href={post.route}>
             <h2>{post.title}</h2>
           </Link>
           {post.description && <p>{post.description}</p>}

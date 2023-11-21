@@ -7,7 +7,7 @@ import { LocalType, LocalesUtil } from "@/utils";
 import { buildDocsTree } from "@/utils/build-docs-tree";
 import { find } from "lodash";
 
-interface PostProps {
+interface DocsProps {
   params: {
     slug: string[];
     lang?: LocalType;
@@ -37,39 +37,35 @@ function getSupportingProps(doc: Docs, params: any) {
   return { tree };
 }
 
-async function getPostFromParams(params: PostProps["params"]) {
-  const { slug } = params;
+async function getDocFromParams(props: DocsProps) {
+  const { params } = props;
   const lang = LocalesUtil.toLocale(params.lang);
+  const reativeRoute = params.slug.join("/");
+  const allWithLangDocs = withLangDocs(lang);
 
-  const post = allDocs.find(
-    (post) => post.slugAsParams.includes(slug) && post.locale === lang
-  );
+  const doc = find(allWithLangDocs, ["reativeRoute", reativeRoute]);
 
-  if (!post) {
-    return null;
-  }
-
-  return post;
+  return {
+    doc,
+  };
 }
 
-export async function generateMetadata({
-  params,
-}: PostProps): Promise<Metadata> {
-  const post = await getPostFromParams(params);
+export async function generateMetadata(props: DocsProps): Promise<Metadata> {
+  const { doc } = await getDocFromParams(props);
 
-  if (!post) {
+  if (!doc) {
     return {};
   }
 
   return {
-    title: post.title,
-    description: post.description,
+    title: doc.title,
+    description: doc.description,
   };
 }
 
 // export async function generateStaticParams(
 //   params: any
-// ): Promise<PostProps["params"][]> {
+// ): Promise<DocsProps["params"][]> {
 //   console.log("params", params);
 
 //   const lang = LocalesUtil.toLocale(params.lang);
@@ -78,7 +74,7 @@ export async function generateMetadata({
 //   }));
 // }
 
-// export const getProps = async (params: PostProps["params"]) => {
+// export const getProps = async (params: DocsProps["params"]) => {
 //   const pagePath = params.slug?.join("/") ?? "";
 //   let doc;
 //   // If on the index page, we don't worry about the global_id
@@ -129,15 +125,11 @@ export async function generateMetadata({
 //   return { props: { doc, ...getSupportingProps(doc, params) } };
 // };
 
-export default async function PostPage(props: PostProps) {
+export default async function DocsPage(props: DocsProps) {
   const { params } = props;
   console.log("params", params);
-  const slug = params.slug;
-  const lang = LocalesUtil.toLocale(params.lang);
+  const { doc } = await getDocFromParams(props);
 
-  const reativeRoute = params.slug.join("/");
-  const allWithLangDocs = withLangDocs(lang);
-  const doc = find(allWithLangDocs, ["reativeRoute", reativeRoute]);
   if (!doc) {
     notFound();
   }
