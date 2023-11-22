@@ -89,7 +89,8 @@ export const MainNavigation = () => {
           </A>
           <Label text="Beta" />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden inline-flex">
+          <ColorSchemeSwitcher />
           <button
             type="button"
             aria-label="Toggle menu"
