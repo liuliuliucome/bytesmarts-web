@@ -1,6 +1,5 @@
 "use client";
 
-import { LocalType } from "@/utils";
 import { createContainer } from "unstated-next";
 import { DocsLayoutProps } from ".";
 

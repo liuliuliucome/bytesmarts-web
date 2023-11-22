@@ -2,7 +2,6 @@ import { Docs } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { A } from "../common";
 import Image from "next/image";
-import { DocsLayoutProps } from "../layouts";
 import { DocsNavigation } from "./DocsNavigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
 import { DocsHeader } from "./DocsHeader";
