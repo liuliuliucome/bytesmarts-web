@@ -1,3 +1,5 @@
+import { omit } from "lodash";
+
 /**
  *
  * @param {import('contentlayer/generated').Docs[]} docs
@@ -17,6 +19,8 @@ export const buildDocsTree = (docs, parentPath = "") => {
         collapsible: doc.collapsible ?? null,
         collapsed: doc.collapsed ?? null,
         children: buildDocsTree(docs, doc.route),
+        // Transferring Document Data
+        metaData: omit(doc, ["children", "_raw", "body"]),
       };
     });
 };

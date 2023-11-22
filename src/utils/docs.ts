@@ -14,7 +14,8 @@ export function getDocsPageProps(props: Page.DocsSlugPageProps) {
   const reativeRoute = params.slug.join("/");
 
   const doc = find(allWithLangDocs, ["reativeRoute", reativeRoute]);
-  const tree = buildDocsTree(allWithLangDocs);
+  // Do not include top-level nodes, directly search for them from root development
+  const tree = buildDocsTree(allWithLangDocs, "docs");
 
   const breadcrumbs: Array<Page.BreadcrumbType> = [];
   if (doc) {

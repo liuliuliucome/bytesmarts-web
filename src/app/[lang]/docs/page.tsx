@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { allPages } from "contentlayer/generated";
-import { DocsLayout } from "@/components/layouts";
+import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { getDocsPageProps } from "@/utils/docs";
 
 export async function generateMetadata(params: Page.DocsProps) {

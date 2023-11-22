@@ -6,6 +6,8 @@ import { Label } from "../common/Label";
 import { Icon } from "../common/Icon";
 import { TreeNode } from "@/types/TreeNode";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
+import { get } from "lodash";
+import IconFont from "../common/IconFont";
 
 const NavLink: FC<{
   title: string;
@@ -16,6 +18,7 @@ const NavLink: FC<{
   collapsible: boolean;
   collapsed: boolean;
   toggleCollapsed: () => void;
+  node: TreeNode;
 }> = ({
   title,
   label,
@@ -25,7 +28,9 @@ const NavLink: FC<{
   collapsible,
   collapsed,
   toggleCollapsed,
+  node,
 }) => {
+  const iconFontName = get(node, ["metaData", "iconFontName"]);
   return (
     <div
       className={classNames(
@@ -42,6 +47,7 @@ const NavLink: FC<{
       )}
     >
       <Link href={url} className="flex items-center h-full space-x-2 grow">
+        {iconFontName && <IconFont type={iconFontName} />}
         <span>{title}</span>
         {label && <Label text={label} />}
       </Link>
@@ -90,6 +96,7 @@ const Node: FC<{ node: TreeNode; level: number; activePath: string }> = ({
         collapsible={node.collapsible ?? false}
         collapsed={collapsed}
         toggleCollapsed={toggleCollapsed}
+        node={node}
       />
       {node.children.length > 0 && !collapsed && (
         <Tree tree={node.children} level={level + 1} activePath={activePath} />
@@ -126,7 +133,7 @@ export const DocsNavigation: FC = () => {
   const { tree } = useDocsLayout();
   const router = usePathname();
   return (
-    <aside className="-ml-6 w-80">
+    <aside data-testid="DocsNavigation" className="-ml-6 w-80">
       <div>
         <Tree tree={tree} level={0} activePath={router} />
       </div>

@@ -3,7 +3,7 @@ import { getLastEditedDate, urlFromFilePath } from "../utils";
 import { bundleMDX } from "mdx-bundler";
 import { toMarkdown } from "mdast-util-to-markdown";
 import { mdxToMarkdown } from "mdast-util-mdx";
-import { computedFields } from "../fields";
+import { commonFields, computedFields } from "../fields";
 import * as unified from "unified";
 
 export type DocHeading = { level: 1 | 2 | 3; title: string };
@@ -52,15 +52,7 @@ export const Docs = defineDocumentType(() => ({
   name: "Docs",
   filePathPattern: `docs/**/*.mdx`,
   contentType: "mdx",
-  fields: {
-    title: {
-      type: "string",
-      required: true,
-    },
-    description: {
-      type: "string",
-    },
-  },
+  fields: commonFields,
   computedFields: {
     ...computedFields,
     pathSegments: {

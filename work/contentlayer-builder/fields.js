@@ -8,6 +8,31 @@ const getMatchLocale = (path) => {
   return matched ? matched[1] || defaultLocale : defaultLocale;
 };
 
+/**
+ * 通用字段
+ * @see {MDX.CommonFileds}
+ * @type {import('contentlayer/source-files').FieldDefs}
+ */
+export const commonFields = {
+  title: {
+    type: "string",
+    required: true,
+  },
+  description: {
+    type: "string",
+  },
+  seoTitle: {
+    type: "string",
+  },
+  seoDescription: {
+    type: "string",
+  },
+  iconFontName: {
+    type: "string",
+    default: "icon-expand",
+  },
+};
+
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
   slug: {

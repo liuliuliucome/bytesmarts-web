@@ -1,6 +1,6 @@
 import "@/styles/css/index.css";
 import "@/styles/sass/index.scss";
-import { BaseContentLayout } from "@/components/layouts";
+import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 
 export const metadata = {
   title: "Create Next App",
