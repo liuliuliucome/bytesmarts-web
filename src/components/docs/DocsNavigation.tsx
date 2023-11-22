@@ -30,7 +30,7 @@ const NavLink: FC<{
   toggleCollapsed,
   node,
 }) => {
-  const iconFontName = get(node, ["metaData", "iconFontName"]);
+  const sidebarIconFont = get(node, ["metaData", "sidebarIconFont"]);
   return (
     <div
       className={classNames(
@@ -47,7 +47,7 @@ const NavLink: FC<{
       )}
     >
       <Link href={url} className="flex items-center h-full space-x-2 grow">
-        {iconFontName && <IconFont type={iconFontName} />}
+        {sidebarIconFont && <IconFont type={sidebarIconFont} />}
         <span>{title}</span>
         {label && <Label text={label} />}
       </Link>

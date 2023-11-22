@@ -7,7 +7,7 @@ declare namespace MDX {
     /**
      * @default 'icon-expand'
      */
-    iconFontName?: string;
+    sidebarIconFont?: string;
   };
 
   type With<T> = T & Record<string, any>;

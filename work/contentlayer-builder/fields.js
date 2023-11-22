@@ -27,7 +27,7 @@ export const commonFields = {
   seoDescription: {
     type: "string",
   },
-  iconFontName: {
+  sidebarIconFont: {
     type: "string",
     default: "icon-expand",
   },
