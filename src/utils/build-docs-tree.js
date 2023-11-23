@@ -15,7 +15,7 @@ export const buildDocsTree = (docs, parentPath = "") => {
         title: doc.title,
         label: doc.label ?? null,
         excerpt: doc.excerpt ?? null,
-        urlPath: doc.route,
+        urlPath: doc.href,
         collapsible: doc.collapsible ?? null,
         collapsed: doc.collapsed ?? null,
         children: buildDocsTree(docs, doc.route),
