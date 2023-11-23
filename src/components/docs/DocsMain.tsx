@@ -5,24 +5,29 @@ import Image from "next/image";
 import { DocsNavigation } from "./DocsNavigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
 import { DocsHeader } from "./DocsHeader";
+import { H2, H3, H4 } from "./Headings";
+import { Relation } from "./Relation";
 
 const Section = (props: { children: React.ReactNode }) => (
   <div>{props.children}</div>
 );
 
 const mdxComponents = {
-  Callout: Section,
-  Card: Section,
+  // 通用组件
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  a: A,
+  Link: A,
   Image,
   img: Image,
 
+  // 扩展组件
+  Callout: Section,
+  Card: Section,
+  Relation: Relation,
   ChevronLink: A,
   Label: Section,
-  h2: Section,
-  h3: Section,
-  h4: Section,
-  a: A,
-  Link: A,
   OptionsTable: Section,
   OptionTitle: Section,
   OptionDescription: Section,
