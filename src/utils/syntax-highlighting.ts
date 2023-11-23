@@ -13,7 +13,7 @@ export type ColorScheme = "light" | "dark";
 
 export const snippetToHtml = async (
   snippet: string,
-  colorScheme: ColorScheme
+  colorScheme: ColorScheme,
 ) => {
   const themeName = `github-${colorScheme}`;
 
@@ -37,11 +37,11 @@ export const snippetToHtml = async (
     { twoslash: true },
     { ...settings, themeName },
     highlighterMap.get(colorScheme)!,
-    twoslash
+    twoslash,
   );
 
   return html.replace(
     "./assets/contentlayer-generated",
-    "contentlayer/generated"
+    "contentlayer/generated",
   );
 };

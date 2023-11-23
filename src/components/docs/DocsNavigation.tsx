@@ -43,10 +43,10 @@ const NavLink: FC<{
               level == 0
                 ? "font-medium text-slate-600 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200"
                 : "font-normal hover:text-slate-600 dark:hover:text-slate-300"
-            }`
+            }`,
       )}
     >
-      <Link href={url} className="flex items-center h-full space-x-2 grow">
+      <Link href={url} className="flex h-full grow items-center space-x-2">
         {sidebarIconFont && <IconFont type={sidebarIconFont} />}
         <span>{title}</span>
         {label && <Label text={label} />}
@@ -55,7 +55,7 @@ const NavLink: FC<{
         <button
           aria-label="Toggle children"
           onClick={toggleCollapsed}
-          className="px-2 py-1 mr-2 shrink-0"
+          className="mr-2 shrink-0 px-2 py-1"
         >
           <span
             className={`block w-2.5 ${collapsed ? "-rotate-90 transform" : ""}`}
@@ -114,7 +114,7 @@ const Tree: FC<{ tree: TreeNode[]; level: number; activePath: string }> = ({
     <div
       className={classNames(
         "ml-3 space-y-2 pl-3",
-        level > 0 ? "border-l border-gray-200 dark:border-gray-800" : ""
+        level > 0 ? "border-l border-gray-200 dark:border-gray-800" : "",
       )}
     >
       {tree.map((treeNode, index) => (

@@ -8,7 +8,7 @@ import { DEFAULT_CHILD_TAG } from "./conts";
  * wrap it in a forwardRef so that we _can_ passthrough the ref
  */
 export function forwardRefWithAs<
-  T extends { name: string; displayName?: string }
+  T extends { name: string; displayName?: string },
 >(component: T): T & { displayName: string } {
   return Object.assign(forwardRef(component as unknown as any) as any, {
     displayName: component.displayName ?? component.name,
@@ -18,7 +18,7 @@ export function forwardRefWithAs<
 function render<TTag extends ElementType, TSlot>(
   props: AS.Props<TTag>,
   slot: TSlot,
-  tag: ElementType
+  tag: ElementType,
 ) {
   const { as: Component = tag, children, refName = "ref", ...rest } = props;
 
@@ -37,15 +37,15 @@ function render<TTag extends ElementType, TSlot>(
       {},
       omit(rest, ["ref"]),
       Component !== Fragment && refRelatedProps,
-      Component !== Fragment && dataAttributes
+      Component !== Fragment && dataAttributes,
     ),
-    resolvedChildren
+    resolvedChildren,
   );
 }
 
 function ASWrapper<TTag extends ElementType = AS.DefaultTag>(
   props: AS.Props<TTag>,
-  ref: Ref<HTMLElement>
+  ref: Ref<HTMLElement>,
 ) {
   const renderProps = { ...props, ref };
   return render(renderProps, {}, DEFAULT_CHILD_TAG);

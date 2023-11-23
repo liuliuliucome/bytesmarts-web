@@ -10,7 +10,8 @@
     "preview": "next build && next start",
     "start": "next start",
     "lint": "next lint",
-    "work:gen": "node ./work/bin/gen.js"
+    "work:gen": "node ./work/bin/gen.js",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -30,6 +31,8 @@
     "next-contentlayer": "^0.3.2",
     "next-themes": "^0.2.1",
     "postcss": "8.4.23",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
     "react": "18",
     "react-dom": "18",
     "shiki": "^0.14.5",

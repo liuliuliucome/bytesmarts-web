@@ -10,5 +10,5 @@ type AppProviderProps = {
 export const { Provider: AppProvider, useContainer: useApp } = createContainer(
   (props?: AppProviderProps) => {
     return props as AppProviderProps;
-  }
+  },
 );

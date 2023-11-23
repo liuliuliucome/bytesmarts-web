@@ -85,7 +85,7 @@ export const Footer: FC = () => {
             {content.note}
           </div>
         </div>
-        <div className="space-y-8 md:flex md:space-y-0 md:space-x-16">
+        <div className="space-y-8 md:flex md:space-x-16 md:space-y-0">
           {content.menus.map(({ title, elements }, index) => (
             <div key={index}>
               <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-800 dark:text-slate-200">

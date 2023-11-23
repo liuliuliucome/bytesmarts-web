@@ -1,5 +1,5 @@
 .makerdown-section {
-  @apply text-[#111827] text-base pb-8 px-2;
+  @apply px-2 pb-8 text-base text-[#111827];
   :global .markdown-content {
     padding-top: 0;
     // padding-bottom: 6rem;
@@ -21,7 +21,7 @@
   h1 {
     font-size: 2.8rem;
     line-height: 4rem;
-    @apply text-center mb-4 text-[#394053] font-semibold;
+    @apply mb-4 text-center font-semibold text-[#394053];
   }
   h2 {
     font-size: 2.8rem;
@@ -44,7 +44,7 @@
   }
 
   @media (min-width: theme("screens.md")) {
-    @apply text-[#111827] text-base px-0;
+    @apply px-0 text-base text-[#111827];
 
     :global .markdown-content {
       padding-top: 0;
@@ -63,7 +63,7 @@
     h1 {
       font-size: 4.8rem;
       line-height: 5.4rem;
-      @apply text-center text-[#394053] font-semibold;
+      @apply text-center font-semibold text-[#394053];
     }
     h2 {
       font-size: 3.2rem;

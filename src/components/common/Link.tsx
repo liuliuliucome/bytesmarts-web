@@ -1,16 +1,19 @@
-import { FC, ReactNode } from 'react'
-import NextLink from 'next/link'
-import { Icon } from './Icon'
+import { FC, ReactNode } from "react";
+import NextLink from "next/link";
+import { Icon } from "./Icon";
 
-export const Link: FC<{ href: string; children: ReactNode }> = ({ href, children }) => {
-  const isExternalUrl = !(href.startsWith('/') || href.startsWith('#'))
+export const Link: FC<{ href: string; children: ReactNode }> = ({
+  href,
+  children,
+}) => {
+  const isExternalUrl = !(href.startsWith("/") || href.startsWith("#"));
 
   return (
     <NextLink href={href}>
       <a
-        className="inline-flex items-center m-0 space-x-1"
-        target={isExternalUrl ? '_blank' : undefined}
-        rel={isExternalUrl ? 'noreferrer' : undefined}
+        className="m-0 inline-flex items-center space-x-1"
+        target={isExternalUrl ? "_blank" : undefined}
+        rel={isExternalUrl ? "noreferrer" : undefined}
       >
         <span>{children}</span>
         {isExternalUrl && (
@@ -20,5 +23,5 @@ export const Link: FC<{ href: string; children: ReactNode }> = ({ href, children
         )}
       </a>
     </NextLink>
-  )
-}
+  );
+};

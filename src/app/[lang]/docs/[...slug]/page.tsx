@@ -4,7 +4,7 @@ import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { getDocsPageProps } from "@/utils/docs";
 
 export async function generateMetadata(
-  props: Page.DocsSlugPageProps
+  props: Page.DocsSlugPageProps,
 ): Promise<Metadata> {
   const { doc } = getDocsPageProps(props);
 

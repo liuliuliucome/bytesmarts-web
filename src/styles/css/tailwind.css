@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply font-Poppins bg-primary text-text-primary text-base;
+    @apply bg-primary font-Poppins text-base text-text-primary;
   }
 }
 

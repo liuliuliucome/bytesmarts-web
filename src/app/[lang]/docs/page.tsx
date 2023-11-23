@@ -5,7 +5,7 @@ import { getDocsPageProps } from "@/utils/docs";
 
 export async function generateMetadata(params: Page.DocsProps) {
   const page = allPages.find(
-    (item) => item.slug.includes("docs") && item.locale === params.params.lang
+    (item) => item.slug.includes("docs") && item.locale === params.params.lang,
   );
 
   if (!page) {

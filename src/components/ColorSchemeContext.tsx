@@ -25,10 +25,10 @@ export const ColorSchemeProvider: FC<React.PropsWithChildren<{}>> = ({
       typeof window !== "undefined"
         ? (localStorage.getItem("theme") as ColorScheme | null) ?? "system"
         : "system",
-    []
+    [],
   );
   const [colorScheme, setColorScheme] = useState<"light" | "dark" | "system">(
-    initalColorScheme
+    initalColorScheme,
   );
 
   const updateColorScheme = useCallback(
@@ -56,7 +56,7 @@ export const ColorSchemeProvider: FC<React.PropsWithChildren<{}>> = ({
         localStorage.theme = newColorScheme;
       }
     },
-    [colorScheme]
+    [colorScheme],
   );
 
   useEffect(() => {

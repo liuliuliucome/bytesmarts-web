@@ -4,7 +4,7 @@
 
 @layer {
   .section-padding-area {
-    @apply max-w-screen-maxxl mx-auto px-2 py-2 md:px-4 md:py-5 lg:px-10 lg:py-10;
+    @apply mx-auto max-w-screen-maxxl px-2 py-2 md:px-4 md:py-5 lg:px-10 lg:py-10;
   }
 
   .max-content {

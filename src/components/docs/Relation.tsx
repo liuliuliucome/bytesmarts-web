@@ -19,12 +19,12 @@ export function Relation(props: RelationProps) {
   return (
     <div
       data-testid="Realtion"
-      className="border border-[#ccc] rounded-lg px-2 pt-2 md:px-4 first:mt-0 mt-4"
+      className="mt-4 rounded-lg border border-[#ccc] px-2 pt-2 first:mt-0 md:px-4"
     >
       <div className="block sm:flex sm:items-start">
         {/* <Image width={70} height={70} {...logo} alt={logo.alt || title} /> */}
         <img
-          className="my-0 mr-4 float-left sm:float-none"
+          className="float-left my-0 mr-4 sm:float-none"
           width={70}
           height={70}
           {...logo}
@@ -38,12 +38,12 @@ export function Relation(props: RelationProps) {
           {tags && tags.length ? (
             <div
               data-testid="tags"
-              className="flex flex-wrap gap-1 w-full pt-2 sm:pt-0 sm:w-auto"
+              className="flex w-full flex-wrap gap-1 pt-2 sm:w-auto sm:pt-0"
             >
               {mapChildren(tags, ({ item, key }) => (
                 <span
                   key={key}
-                  className="py-px px-1.5 text-12 rounded-xl inline-flex items-center text-[#bebebe] bg-[#24292e] shadow-[inset 0 0 0 1px #444d56]"
+                  className="shadow-[inset 0 0 0 1px #444d56] inline-flex items-center rounded-xl bg-[#24292e] px-1.5 py-px text-12 text-[#bebebe]"
                 >
                   {isString(item.icon) ? (
                     <IconFont className="mr-1" type={item.icon as any} />

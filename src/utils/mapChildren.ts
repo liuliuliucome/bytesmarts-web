@@ -3,7 +3,7 @@ import { get } from "lodash";
 
 export default function mapChildren<
   T = any,
-  R extends Function = Component.MapRenderComponent<T>
+  R extends Function = Component.MapRenderComponent<T>,
 >(options?: T[] | T, render?: R) {
   if (!isNotEmptyArray(options)) {
     return null;

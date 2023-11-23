@@ -38,12 +38,12 @@ export function DocsMain() {
   const MDXContent = useMDXComponent(doc.body.code || "");
 
   return (
-    <div className="relative w-full mx-auto max-w-screen-2xl lg:flex lg:items-start">
+    <div className="relative mx-auto w-full max-w-screen-2xl lg:flex lg:items-start">
       <div
         style={{ height: "calc(100vh - 64px)" }}
-        className="sticky hidden border-r border-gray-200 top-16 shrink-0 dark:border-gray-800 lg:block"
+        className="sticky top-16 hidden shrink-0 border-r border-gray-200 dark:border-gray-800 lg:block"
       >
-        <div className="h-full p-8 pl-16 -ml-3 overflow-y-scroll">
+        <div className="-ml-3 h-full overflow-y-scroll p-8 pl-16">
           <DocsNavigation />
         </div>
         <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-t from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
@@ -52,7 +52,7 @@ export function DocsMain() {
 
       <div className="relative w-full grow">
         <DocsHeader title={doc.title} />
-        <div className="text-16 w-full md:max-w-3xl p-4 pb-8 mx-auto mb-4 prose docs prose-slate prose-violet shrink prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-invert dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 md:mb-8 md:px-8 lg:mx-0 lg:max-w-full lg:px-16">
+        <div className="docs prose prose-slate prose-violet mx-auto mb-4 w-full shrink p-4 pb-8 text-16 dark:prose-invert prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 md:mb-8 md:max-w-3xl md:px-8 lg:mx-0 lg:max-w-full lg:px-16">
           {MDXContent && <MDXContent components={mdxComponents as any} />}
           {/* {doc.show_child_cards && (
             <>
@@ -81,7 +81,7 @@ export function DocsMain() {
       </div>
       <div
         style={{ maxHeight: "calc(100vh - 128px)" }}
-        className="sticky top-32 hidden w-80 shrink-0 overflow-y-scroll p-8 pr-16 1.5xl:block"
+        className="1.5xl:block sticky top-32 hidden w-80 shrink-0 overflow-y-scroll p-8 pr-16"
       >
         {/* <PageNavigation headings={doc.headings} /> */}
         <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-t from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />

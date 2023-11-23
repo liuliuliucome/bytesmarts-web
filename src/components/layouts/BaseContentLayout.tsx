@@ -17,7 +17,7 @@ export function BaseContentLayout(props: BaseContentProps) {
         <ColorSchemeProvider>
           <div
             className={
-              "antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50"
+              "min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50"
             }
           >
             {children}

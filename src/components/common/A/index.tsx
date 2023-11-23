@@ -36,7 +36,7 @@ export const A = forwardRef<HTMLAnchorElement, Component.WithChildren<AProps>>(
         {props.children}
       </Link>
     );
-  }
+  },
 );
 
 A.displayName = "A";
