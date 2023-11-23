@@ -15,7 +15,9 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <html lang="en">
+    // https://github.com/vercel/next.js/issues/49350
+    // TODO: next-theme 引起，还未彻底解决
+    <html lang="en" suppressHydrationWarning>
       <body>
         <BaseContentLayout>{children}</BaseContentLayout>
       </body>
