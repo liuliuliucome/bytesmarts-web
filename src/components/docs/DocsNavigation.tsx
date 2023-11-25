@@ -34,7 +34,7 @@ const NavLink: FC<{
   return (
     <div
       className={classNames(
-        "group flex h-8 items-center justify-between space-x-2 whitespace-nowrap rounded-md px-3 text-sm leading-none",
+        "group flex items-center justify-between space-x-2 rounded-md px-3 py-1 text-sm",
         url == activePath
           ? `${
               level == 0 ? "font-medium" : "font-normal"
@@ -46,8 +46,10 @@ const NavLink: FC<{
             }`,
       )}
     >
-      <Link href={url} className="flex h-full grow items-center space-x-2">
-        {sidebarIconFont && <IconFont type={sidebarIconFont} />}
+      <Link href={url} className="flex h-full grow items-start space-x-2">
+        {level > 0 && sidebarIconFont && (
+          <IconFont className="mt-1" type={sidebarIconFont} />
+        )}
         <span>{title}</span>
         {label && <Label text={label} />}
       </Link>
@@ -114,7 +116,7 @@ const Tree: FC<{ tree: TreeNode[]; level: number; activePath: string }> = ({
     <div
       className={classNames(
         "ml-3 space-y-2 pl-3",
-        level > 0 ? "border-l border-gray-200 dark:border-gray-800" : "",
+        // level > 0 ? "border-l border-gray-200 dark:border-gray-800" : "",
       )}
     >
       {tree.map((treeNode, index) => (
