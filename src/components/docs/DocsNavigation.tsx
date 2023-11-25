@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import { Label } from "../common/Label";
 import { Icon } from "../common/Icon";
-import { TreeNode } from "@/types/TreeNode";
+import { TreeNode } from "types/TreeNode";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
 import { get } from "lodash";
 import IconFont from "../common/IconFont";

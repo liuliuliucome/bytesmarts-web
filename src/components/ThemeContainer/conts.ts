@@ -1,3 +1,4 @@
+import { APP_THEME_STORAGE_KEY } from "@/store/const";
 import { ThemeState } from ".";
 
 export enum ThemeValues {
@@ -11,8 +12,6 @@ export const getThemesList = () => [
   ThemeValues.LIGHT,
   ThemeValues.SYSTEM,
 ];
-
-export const APP_THEME_STORAGE_KEY = "app-theme";
 
 export const defaultThemeState = (): ThemeState => ({
   themes: getThemesList(),

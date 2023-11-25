@@ -4,7 +4,7 @@ import { omit } from "lodash";
  *
  * @param {import('contentlayer/generated').Docs[]} docs
  * @param {string} parentPathNames
- * @returns {import('@/types/TreeNode').TreeNode[]}
+ * @returns {import('types/TreeNode').TreeNode[]}
  */
 export const buildDocsTree = (docs, parentPath = "") => {
   return docs

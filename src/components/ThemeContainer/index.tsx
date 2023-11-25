@@ -1,13 +1,10 @@
 import { createContainer } from "unstated-next";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  APP_THEME_STORAGE_KEY,
-  ThemeValues,
-  defaultThemeState,
-  getThemesList,
-} from "./conts";
+import { useCallback, useMemo, useState } from "react";
+import { ThemeValues, defaultThemeState, getThemesList } from "./conts";
+import i18nConfig from "config/i18n.config";
+import { APP_THEME_STORAGE_KEY } from "@/store/const";
 
 export type ThemeValueType = (typeof ThemeValues)[keyof typeof ThemeValues];
 
@@ -17,24 +14,17 @@ export type ThemeState = Omit<ThemeProviderProps, "children" | "themes"> & {
 
 export const { Provider: AppThemeProvider, useContainer: useAppTheme } =
   createContainer((props?: ThemeProviderProps) => {
-    const { theme: nextTheme, setTheme: nextSetTheme } = useTheme();
+    const { setTheme: nextSetTheme } = useTheme();
 
-    const initTheme = useCallback(() => {
-      if (typeof window !== "undefined") {
-        const localTheme = localStorage.getItem(APP_THEME_STORAGE_KEY);
-        if (localTheme && getThemesList().includes(localTheme as ThemeValues)) {
-          return localTheme as ThemeValues;
-        }
-      }
-      return ThemeValues.SYSTEM as ThemeValues;
-    }, []);
+    const [appState, setAppState] = useState({
+      theme: ThemeValues.LIGHT,
+      lang: i18nConfig.defaultLocale,
+    });
 
-    const [theme, setTheme] = useState<ThemeValues>(ThemeValues.LIGHT);
-
-    const _setTheme = useCallback(
+    const setTheme = useCallback(
       (value: ThemeValues) => {
         nextSetTheme(value);
-        setTheme(value);
+        setAppState((prev) => ({ ...prev, theme: value }));
 
         getThemesList().forEach((theme) => {
           document.documentElement.classList.remove(theme);
@@ -50,12 +40,12 @@ export const { Provider: AppThemeProvider, useContainer: useAppTheme } =
       [nextSetTheme],
     );
 
-    useEffect(() => {
-      setTheme(initTheme());
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //   setTheme(initTheme());
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
-    return { theme: theme as ThemeValueType, setTheme: _setTheme };
+    return { ...appState, setTheme: setTheme };
   });
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

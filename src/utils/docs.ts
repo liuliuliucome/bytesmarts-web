@@ -1,9 +1,9 @@
 import { allDocs } from "contentlayer/generated";
-import { LocalType, LocalesUtil } from "./LocalesUtil";
+import { LocalesUtil } from "./LocalesUtil";
 import { find } from "lodash";
 import { buildDocsTree } from "./build-docs-tree";
 
-const withLangDocs = (lang: LocalType) =>
+const withLangDocs = (lang: I18n.Locale) =>
   allDocs.filter((item) => item.locale === lang);
 
 export function getDocsPageProps(props: Page.DocsSlugPageProps) {

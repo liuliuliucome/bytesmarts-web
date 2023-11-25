@@ -1,10 +1,9 @@
 "use client";
 import { ReactNode } from "react";
 import { AppProvider } from "../app-provider";
-import { LocalType, LocalesUtil } from "@/utils";
-import { ThemeProvider } from "../ThemeContainer";
+import { LocalesUtil } from "@/utils";
 
-type BaseContentProps = { lang?: LocalType; children: ReactNode };
+type BaseContentProps = { lang?: I18n.Locale; children: ReactNode };
 
 export function BaseContentLayout(props: BaseContentProps) {
   const { children, lang } = props;
@@ -12,15 +11,13 @@ export function BaseContentLayout(props: BaseContentProps) {
 
   return (
     <AppProvider initialState={{ locale }}>
-      <ThemeProvider>
-        <div
-          className={
-            "min-h-screen bg-primary text-slate-900 antialiased dark:text-slate-50"
-          }
-        >
-          {children}
-        </div>
-      </ThemeProvider>
+      <div
+        className={
+          "min-h-screen bg-primary text-slate-900 antialiased dark:text-slate-50"
+        }
+      >
+        {children}
+      </div>
     </AppProvider>
   );
 }
