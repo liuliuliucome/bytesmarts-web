@@ -76,7 +76,7 @@ export const Footer: FC = () => {
         <div>
           <Link
             href="/"
-            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
+            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-text-primary"
           >
             <Logo />
             <span>Bytesmarts-web</span>

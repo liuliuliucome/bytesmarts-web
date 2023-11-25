@@ -6,6 +6,7 @@ import { Label } from "./Label";
 import { Logo } from "./Logo";
 import { A } from "./A";
 import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
+import IconFont from "./IconFont";
 
 const navLinks: Array<{ label: string; url: string }> = [
   { label: "Documentation", url: "/docs" },
@@ -78,12 +79,12 @@ export const MainNavigation = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
+    <header className="fixed z-50 w-full border-b border-gray-200 bg-secondary dark:border-none">
       <div className="mr-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-4 md:px-8 lg:px-16">
         <div className="flex items-center space-x-2.5">
           <A
             href="/"
-            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
+            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-text-primary"
           >
             <Logo />
             <span className="-mt-0.5">Bytesmarts-web</span>
@@ -96,10 +97,10 @@ export const MainNavigation = () => {
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
-            className="flex h-8 w-8 items-center justify-end text-slate-600 dark:text-slate-300"
+            className="flex h-8 w-8 items-center justify-end text-text-primary dark:text-slate-300"
           >
             <span className="inline-block w-4">
-              <Icon name={open ? "close" : "bars"} />
+              <IconFont type={open ? "icon-close" : "icon-menu"} />
             </span>
           </button>
           {open && (
@@ -122,7 +123,7 @@ export const MainNavigation = () => {
             </div>
           )}
         </div>
-        <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 lg:flex">
+        <nav className="hidden items-center divide-x divide-gray-200 text-text-primary dark:divide-gray-800 lg:flex">
           <div className="flex items-center pr-2 lg:space-x-4 lg:pr-8">
             {navLinks.map(({ label, url }, index) => (
               <NavLink

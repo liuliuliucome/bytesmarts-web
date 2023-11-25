@@ -4,6 +4,7 @@ import { DocsNavigation } from "./DocsNavigation";
 import { Icon } from "../common/Icon";
 import { usePathname } from "next/navigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
+import classNames from "classnames";
 
 export const DocsHeader: FC<{
   title: string;
@@ -28,7 +29,7 @@ export const DocsHeader: FC<{
 
   return (
     <>
-      <header className="relative w-full">
+      <header data-testid="DocsHeader" className="relative w-full">
         <div className="mx-auto w-full max-w-3xl space-y-2 px-4 py-8 md:px-8 lg:max-w-full lg:px-16">
           <ul className="-mx-1 flex flex-wrap items-center text-sm">
             {breadcrumbs.map(({ path, title }, index) => (
@@ -91,9 +92,10 @@ export const DocsHeader: FC<{
         </div>
       )}
       <div
-        className={`fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter transition-opacity duration-200 dark:border-gray-800 dark:bg-gray-950 lg:block ${
-          top ? "opacity-0" : "opacity-100"
-        }`}
+        className={classNames(
+          "fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 bg-primary backdrop-blur backdrop-filter transition-opacity duration-200 dark:border-gray-600 lg:block",
+          top ? "opacity-0" : "opacity-100",
+        )}
       >
         <ul className="flex h-full items-center space-x-2 px-16 text-sm">
           {breadcrumbs.map(({ path, title }, index) => (

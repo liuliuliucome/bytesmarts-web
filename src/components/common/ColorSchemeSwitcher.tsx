@@ -1,37 +1,12 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useState, useEffect } from "react";
-import { useColorScheme, useUpdateColorScheme } from "../ColorSchemeContext";
+import { useCallback } from "react";
 import { Icon } from "./Icon";
+import { ThemeValueType, useAppTheme } from "../ThemeContainer";
+import { ThemeValues } from "../ThemeContainer/conts";
+import IconFont from "./IconFont";
 
 export const ColorSchemeSwitcher = () => {
-  const preferredColorScheme = useColorScheme();
-  const updateColorScheme = useUpdateColorScheme();
-  const [colorScheme, setColorScheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    const handleEvent = () => {
-      updateColorScheme(localStorage?.theme || "system");
-    };
-    handleEvent();
-    window.addEventListener("storage", handleEvent);
-    return () => {
-      window.removeEventListener("storage", handleEvent);
-    };
-  }, [updateColorScheme]);
-
-  useEffect(() => {
-    if (preferredColorScheme === "system") {
-      setColorScheme(
-        window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light",
-      );
-    } else {
-      setColorScheme(preferredColorScheme);
-    }
-  }, [preferredColorScheme]);
-
+  const { theme, setTheme } = useAppTheme();
   const fixScrollPadding = () => {
     if (document.documentElement.classList.contains("scroll-padding")) {
       document.documentElement.classList.remove("scroll-padding");
@@ -40,50 +15,63 @@ export const ColorSchemeSwitcher = () => {
     }
   };
 
+  const onChangeTheme = useCallback(
+    (theme: ThemeValueType) => {
+      return () => {
+        setTheme(theme);
+      };
+    },
+    [theme],
+  );
+
   return (
     <DropdownMenu.Root onOpenChange={fixScrollPadding}>
-      <DropdownMenu.Trigger className="flex h-8 items-center rounded-md bg-transparent px-3 text-slate-400 hover:bg-gray-50 hover:text-slate-500 dark:text-slate-500 dark:hover:bg-gray-900 dark:hover:text-slate-400">
+      <DropdownMenu.Trigger className="flex h-8 items-center rounded-md bg-transparent px-3 text-text-primary  hover:bg-gray-50 hover:text-slate-500 dark:text-slate-500 dark:hover:bg-gray-900 dark:hover:text-slate-400">
         <span className="block w-4">
-          <Icon name={colorScheme === "light" ? "sun" : "moon"} />
+          <IconFont
+            type={
+              theme === ThemeValues.LIGHT ? "icon-qingtian" : "icon-yueliang"
+            }
+          />
         </span>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content className="z-100 rounded-md border border-gray-100 bg-gray-50 p-2 dark:border-gray-800 dark:bg-gray-900">
         <DropdownMenu.Item
-          onSelect={() => updateColorScheme("light")}
+          onSelect={onChangeTheme(ThemeValues.LIGHT)}
           className={`group flex h-8 cursor-pointer items-center space-x-4 rounded-md px-3 text-sm font-medium leading-none hover:outline-none ${
-            preferredColorScheme == "light"
+            theme == ThemeValues.LIGHT
               ? "bg-violet-50 text-violet-900 dark:bg-violet-500/20 dark:text-violet-50"
               : "text-slate-500 hover:bg-gray-50 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-gray-900 dark:hover:text-slate-300"
           }`}
         >
           <span className="block w-4">
-            <Icon name="sun" />
+            <IconFont type="icon-qingtian" />
           </span>
           <span>Light</span>
         </DropdownMenu.Item>
         <DropdownMenu.Item
-          onSelect={() => updateColorScheme("dark")}
+          onSelect={onChangeTheme(ThemeValues.DARK)}
           className={`group flex h-8 cursor-pointer items-center space-x-4 rounded-md bg-transparent px-3 text-sm font-medium leading-none hover:outline-none ${
-            preferredColorScheme == "dark"
+            theme == ThemeValues.DARK
               ? "bg-violet-50 text-violet-900 dark:bg-violet-500/20 dark:text-violet-50"
               : "text-slate-500 hover:bg-gray-50 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-gray-900 dark:hover:text-slate-300"
           }`}
         >
           <span className="block w-4">
-            <Icon name="moon" />
+            <IconFont type="icon-yueliang" />
           </span>
           <span>Dark</span>
         </DropdownMenu.Item>
         <DropdownMenu.Item
-          onSelect={() => updateColorScheme("system")}
+          onSelect={onChangeTheme(ThemeValues.SYSTEM)}
           className={`group flex h-8 cursor-pointer items-center space-x-4 rounded-md bg-transparent px-3 text-sm font-medium leading-none hover:outline-none ${
-            preferredColorScheme == "system"
+            theme == "system"
               ? "bg-violet-50 text-violet-900 dark:bg-violet-500/20 dark:text-violet-50"
               : "text-slate-500 hover:bg-gray-50 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-gray-900 dark:hover:text-slate-300"
           }`}
         >
           <span className="block w-4">
-            <Icon name="gear" />
+            <IconFont type="icon-system" />
           </span>
           <span>System</span>
         </DropdownMenu.Item>
