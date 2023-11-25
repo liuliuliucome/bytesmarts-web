@@ -1,7 +1,7 @@
 import { createContainer } from "unstated-next";
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   APP_THEME_STORAGE_KEY,
   ThemeValues,
@@ -17,11 +17,24 @@ export type ThemeState = Omit<ThemeProviderProps, "children" | "themes"> & {
 
 export const { Provider: AppThemeProvider, useContainer: useAppTheme } =
   createContainer((props?: ThemeProviderProps) => {
-    const { theme, setTheme: nextSetTheme } = useTheme();
+    const { theme: nextTheme, setTheme: nextSetTheme } = useTheme();
 
-    const setTheme = useCallback(
+    const initTheme = useCallback(() => {
+      if (typeof window !== "undefined") {
+        const localTheme = localStorage.getItem(APP_THEME_STORAGE_KEY);
+        if (localTheme && getThemesList().includes(localTheme as ThemeValues)) {
+          return localTheme as ThemeValues;
+        }
+      }
+      return ThemeValues.SYSTEM as ThemeValues;
+    }, []);
+
+    const [theme, setTheme] = useState<ThemeValues>(ThemeValues.LIGHT);
+
+    const _setTheme = useCallback(
       (value: ThemeValues) => {
         nextSetTheme(value);
+        setTheme(value);
 
         getThemesList().forEach((theme) => {
           document.documentElement.classList.remove(theme);
@@ -38,16 +51,11 @@ export const { Provider: AppThemeProvider, useContainer: useAppTheme } =
     );
 
     useEffect(() => {
-      if (typeof window !== "undefined") {
-        const localTheme = localStorage.getItem(APP_THEME_STORAGE_KEY);
-        if (theme !== localTheme) {
-          setTheme((localTheme as ThemeValues) || ThemeValues.SYSTEM);
-        }
-      }
+      setTheme(initTheme());
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { theme: theme as ThemeValueType, setTheme };
+    return { theme: theme as ThemeValueType, setTheme: _setTheme };
   });
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

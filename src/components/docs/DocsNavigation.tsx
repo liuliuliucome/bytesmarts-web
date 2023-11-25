@@ -34,15 +34,15 @@ const NavLink: FC<{
   return (
     <div
       className={classNames(
-        "group flex items-center justify-between space-x-2 rounded-md px-3 py-1 text-sm",
+        "group flex items-center justify-between space-x-2 rounded-md px-3 py-1",
         url == activePath
           ? `${
-              level == 0 ? "font-medium" : "font-normal"
+              level == 0 ? "text-lg font-medium" : "text-14 font-normal"
             } bg-violet-50 text-violet-900 dark:bg-violet-500/20 dark:text-violet-50`
           : `hover:bg-gray-50 dark:hover:bg-gray-900 ${
               level == 0
-                ? "font-medium text-slate-600 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200"
-                : "font-normal hover:text-slate-600 dark:hover:text-slate-300"
+                ? "text-lg font-medium text-slate-600 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200"
+                : "text-14 font-normal hover:text-slate-600 dark:hover:text-slate-300"
             }`,
       )}
     >
@@ -115,7 +115,7 @@ const Tree: FC<{ tree: TreeNode[]; level: number; activePath: string }> = ({
   return (
     <div
       className={classNames(
-        "ml-3 space-y-2 pl-3",
+        "ml-3 space-y-2",
         // level > 0 ? "border-l border-gray-200 dark:border-gray-800" : "",
       )}
     >

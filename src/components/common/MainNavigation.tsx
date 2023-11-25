@@ -89,7 +89,6 @@ export const MainNavigation = () => {
             <Logo />
             <span className="-mt-0.5">Bytesmarts-web</span>
           </A>
-          <Label text="Beta" />
         </div>
         <div className="inline-flex lg:hidden">
           <ColorSchemeSwitcher />

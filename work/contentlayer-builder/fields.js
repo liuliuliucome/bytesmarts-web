@@ -1,5 +1,3 @@
-import { slug } from "github-slugger";
-
 const locales = ["zh", "en"];
 const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
 const defaultLocale = "zh";
