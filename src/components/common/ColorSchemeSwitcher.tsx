@@ -1,6 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useCallback } from "react";
-import { Icon } from "./Icon";
 import { ThemeValueType, useAppTheme } from "../ThemeContainer";
 import { ThemeValues } from "../ThemeContainer/conts";
 import IconFont from "./IconFont";
