@@ -1,9 +1,8 @@
 import { BaseStore } from "@/store";
-import { throttle } from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export function useStore<T, S extends BaseStore<T>>(store: S) {
-  const storeState = useState<S["state"]>(store.state);
+export function useStore<T>(store: BaseStore<T>) {
+  const storeState = useState<T>(store.state);
   console.log("storeState", storeState[0]);
 
   useEffect(() => {
