@@ -1,10 +1,9 @@
-import workConfig from "config/workConfig";
+import i18nConfig from "config/i18n.config";
 import { isString } from "lodash";
 
 export type LocalType = (typeof locales)[number];
 
-const { locales, defaultLocale } = workConfig.i18n;
-const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
+const { locales, defaultLocale, localUrlReg } = i18nConfig;
 
 export class LocalesUtil {
   static toLocale(lang: string | undefined): LocalType {

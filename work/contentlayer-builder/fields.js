@@ -1,10 +1,12 @@
-const locales = ["zh", "en"];
-const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
-const defaultLocale = "zh";
+import i18nConfig from "../config/i18n.config";
+
+const { localUrlReg, defaultLocale } = i18nConfig;
+
 const getMatchLocale = (path) => {
   const matched = path.match(localUrlReg);
   return matched ? matched[1] || defaultLocale : defaultLocale;
 };
+
 /**
  *
  * @param {import('contentlayer/source-files').LocalDocument} doc

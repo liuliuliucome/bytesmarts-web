@@ -1,8 +1,8 @@
+import i18nConfig from "config/i18n.config";
 import { NextRequest, NextResponse } from "next/server";
-import workConfig from "config/workConfig";
 
 export async function middleware(request: NextRequest) {
-  const { locales, defaultLocale } = workConfig.i18n;
+  const { locales, defaultLocale } = i18nConfig;
 
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
