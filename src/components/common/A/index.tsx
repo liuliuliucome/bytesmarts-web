@@ -11,7 +11,7 @@ export type AProps = BaseLinkProps;
 export type HrefType = AProps["href"];
 
 function wrapperHref(href: HrefType) {
-  return href;
+  return href || "#";
 }
 
 /**

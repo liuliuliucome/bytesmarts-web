@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "rimraf .contentlayer && contentlayer build && next dev -p 3102",
+    "dev": "rimraf .contentlayer && contentlayer build && next dev -p 3103",
     "clean": "rimraf node_modules yarn.lock package-lock.json .contentlayer .next",
     "build:content": "contentlayer build",
     "build": "next build",
