@@ -1,15 +1,15 @@
 import { BaseStore } from "@/store";
-import { useEffect, useState } from "react";
+import { isFunction } from "lodash";
+import { useCallback, useEffect, useState } from "react";
 
 export function useStore<T>(store: BaseStore<T>) {
   const storeState = useState<T>(store.state);
-  console.log("storeState", storeState[0]);
+
+  const [_storeState, _setStoreState] = storeState;
 
   useEffect(() => {
-    const [, setStoreState] = storeState;
     const onSubscription = (val: T) => {
-      console.log("subscription");
-      setStoreState(val);
+      _setStoreState(val);
     };
 
     store.observer(onSubscription);
@@ -18,5 +18,16 @@ export function useStore<T>(store: BaseStore<T>) {
     };
   }, []);
 
-  return storeState;
+  const setStoreState: typeof _setStoreState = useCallback((value) => {
+    if (isFunction(value)) {
+      _setStoreState((prev) => {
+        return value(prev);
+      });
+      return;
+    }
+
+    _setStoreState(value);
+  }, []);
+
+  return [_storeState, setStoreState] as [T, typeof _setStoreState];
 }
