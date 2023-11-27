@@ -1,7 +1,7 @@
 import { Observer } from "./Observer";
 
-export class BaseStore<T> extends Observer<T> {
-  mounted = false;
+export class SliceStore<T> extends Observer<T> {
+  private mounted = false;
   state: T;
 
   constructor(initState: () => T) {
@@ -9,7 +9,7 @@ export class BaseStore<T> extends Observer<T> {
     this.state = initState();
   }
 
-  initWith = (fn: any) => {
+  setup = (fn: any) => {
     if (this.mounted) {
       return;
     }

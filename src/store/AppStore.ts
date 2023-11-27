@@ -1,7 +1,7 @@
 import { ThemeValues, getThemesList } from "@/components/ThemeContainer/conts";
-import { BaseStore } from "@/lib/BaseStore";
 import i18nConfig from "config/i18n.config";
 import { APP_LOCALE_STORAGE_KEY, APP_THEME_STORAGE_KEY } from "./const";
+import { SliceStore } from "@/lib/slice-store";
 
 class AppStoreState {
   theme: ThemeValues;
@@ -13,7 +13,7 @@ class AppStoreState {
   }
 }
 
-export class AppStore extends BaseStore<AppStoreState> {
+export class AppStore extends SliceStore<AppStoreState> {
   constructor() {
     super(() => new AppStoreState(ThemeValues.LIGHT, i18nConfig.defaultLocale));
   }
@@ -39,7 +39,7 @@ export class AppStore extends BaseStore<AppStoreState> {
   };
 
   init() {
-    this.initWith(() => {
+    this.setup(() => {
       const theme = this.getDefaultTheme();
       const lang = this.getDefaultLocale();
 

@@ -1,4 +1,4 @@
-import { identity } from "lodash";
+const identity = <T>(value: T) => value;
 
 type ObserverHandler<T> = (value: T) => void;
 export class Observer<T> {
