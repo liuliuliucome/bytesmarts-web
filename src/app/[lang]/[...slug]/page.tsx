@@ -13,8 +13,8 @@ export async function generateMetadata(
   }
 
   return {
-    title: doc.title,
-    description: doc.description,
+    title: doc.seoTitle || doc.title,
+    description: doc.seoDescription || doc.description,
   };
 }
 

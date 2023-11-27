@@ -13,8 +13,8 @@ export async function generateMetadata(params: Page.DocsProps) {
   }
 
   return {
-    title: page.title,
-    description: page.description,
+    title: page.seoTitle || page.title,
+    description: page.seoDescription || page.description,
   };
 }
 
