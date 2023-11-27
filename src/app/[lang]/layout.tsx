@@ -1,6 +1,8 @@
 import "@/styles/css/index.css";
 import "@/styles/sass/index.scss";
 import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
+import iconFontJson from "work/config/iconFont.json";
+import Script from "next/script";
 
 export const runtime = "edge";
 
@@ -22,6 +24,8 @@ export default function RootLayout(props: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <BaseContentLayout>{children}</BaseContentLayout>
+        {/* FIXME: 在现有版本中， build 后 next 会将自动创建的 script 标签去掉，道中 iconfont.js 无法被加载， 且需要是最后一个script  */}
+        <Script id="iconfont-id" src={iconFontJson.js} />
       </body>
     </html>
   );

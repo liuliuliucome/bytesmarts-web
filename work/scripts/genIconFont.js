@@ -22,7 +22,7 @@ export type IconFontType = ${types};
  * 借用 antd createFromIconfontCN 创建的 iconfont.cn 上的字体图标
  */
 const IconFont = createFromIconfontCN<IconFontType>({
-  scriptUrl: 'https:'.concat(iconFontJson.js),
+  scriptUrl: iconFontJson.js,
 });
 
 export default IconFont;
