@@ -53,9 +53,6 @@ export const commonFields = {
   label: {
     type: "string",
   },
-  show_child_cards: {
-    type: "string",
-  },
   nav_title: {
     type: "string",
   },
@@ -67,18 +64,18 @@ export const computedFields = {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
   },
-  slugAsParams: {
-    type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
+  // slugAsParams: {
+  //   type: "string",
+  //   resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+  // },
   locale: {
     type: "string",
     resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
   },
-  reativeRoute: {
-    type: "string",
-    resolve: (doc) => getPaths(doc, 1).join("/"),
-  },
+  // reativeRoute: {
+  //   type: "string",
+  //   resolve: (doc) => getPaths(doc, 1).join("/"),
+  // },
   parentRoute: {
     type: "string",
     resolve: (doc) => {
@@ -94,11 +91,11 @@ export const computedFields = {
 
   /**
    * HTMLLinkElement href attr
-   */
-  href: {
-    type: "string",
-    resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
-  },
+  //  */
+  // href: {
+  //   type: "string",
+  //   resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
+  // },
   /**
    * HTMLLinkElement href attr(absoulte)
    */
