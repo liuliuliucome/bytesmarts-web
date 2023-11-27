@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "next lint",
     "work:gen": "node ./work/bin/gen.js",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "pages:build": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
