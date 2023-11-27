@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { getDocsPageProps } from "@/utils/docs";
+
+export const dynamicParams = false;
+
 export async function generateMetadata(
   props: Page.DocsSlugPageProps,
 ): Promise<Metadata> {
