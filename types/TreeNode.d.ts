@@ -8,4 +8,5 @@ export type TreeNode = {
   collapsible: boolean | null;
   collapsed: boolean | null;
   metaData?: MDX.With<MDX.CommonFileds>;
+  level: number
 };
