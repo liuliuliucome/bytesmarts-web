@@ -38,18 +38,7 @@ export class AppStore extends SliceStore<AppStoreState> {
     return i18nConfig.defaultLocale as I18n.Locale;
   };
 
-  init() {
-    this.setup(() => {
-      const theme = this.getDefaultTheme();
-      const lang = this.getDefaultLocale();
-
-      console.log("init app");
-
-      this.emit(new AppStoreState(theme, lang));
-    });
-  }
-
-  setTheme(value: ThemeValues) {
+  static setLocalTheme(value: ThemeValues) {
     getThemesList().forEach((theme) => {
       document.documentElement.classList.remove(theme);
     });
@@ -60,7 +49,22 @@ export class AppStore extends SliceStore<AppStoreState> {
       document.documentElement.style.colorScheme = value;
     }
     localStorage.setItem(APP_THEME_STORAGE_KEY, value);
+  }
 
+  init() {
+    this.setup(() => {
+      const theme = this.getDefaultTheme();
+      const lang = this.getDefaultLocale();
+
+      this.emit(new AppStoreState(theme, lang));
+
+      // rerender ui
+      AppStore.setLocalTheme(theme);
+    });
+  }
+
+  setTheme(value: ThemeValues) {
     this.emit(new AppStoreState(value, this.state.lang));
+    AppStore.setLocalTheme(value);
   }
 }
