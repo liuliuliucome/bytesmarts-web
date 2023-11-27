@@ -47,6 +47,18 @@ export const commonFields = {
     type: "string",
     default: "icon-expand",
   },
+  excerpt: {
+    type: "string",
+  },
+  label: {
+    type: "string",
+  },
+  show_child_cards: {
+    type: "string",
+  },
+  nav_title: {
+    type: "string",
+  },
 };
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
