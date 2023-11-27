@@ -4,7 +4,7 @@ import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 import iconFontJson from "work/config/iconFont.json";
 import Script from "next/script";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export const metadata = {
   title: "Create Next App",

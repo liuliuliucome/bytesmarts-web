@@ -18,7 +18,26 @@ export async function generateMetadata(
   };
 }
 
+export async function generateStaticParams(props: Page.DocsSlugPageProps) {
+  console.log("generateStaticParams props", props);
+
+  const { allDocs } = getDocsPageProps({
+    params: {
+      ...props.params,
+      slug: [""],
+    },
+  });
+
+  return allDocs.map((docs) => {
+    return {
+      slug: docs.reativeRoute.split("/"),
+    };
+  });
+}
+
 export default async function DocsPage(props: Page.DocsSlugPageProps) {
+  console.log("props", props);
+
   const { allDocs, doc, breadcrumbs, docTree } = getDocsPageProps(props);
 
   if (!doc) {
