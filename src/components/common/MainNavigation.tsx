@@ -6,6 +6,7 @@ import { Label } from "./Label";
 import { Logo } from "./Logo";
 import { A } from "./A";
 import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
+import IconFont from "./IconFont";
 
 const navLinks: Array<{ label: string; url: string }> = [
   { label: "Documentation", url: "/docs" },
@@ -61,6 +62,7 @@ export const SearchButton: FC<{ showShortcut?: boolean }> = ({
 }) => {
   return (
     <button
+      data-testid="SearchButton"
       aria-label="Search"
       className="flex h-8 cursor-text items-center rounded-md border border-gray-200 bg-gray-50 px-2 text-sm hover:border-gray-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800"
     >
@@ -77,17 +79,16 @@ export const MainNavigation = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
-      <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-4 md:px-8 lg:px-16">
+    <header className="fixed z-50 w-full border-b border-gray-200 bg-secondary dark:border-none">
+      <div className="mr-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-4 md:px-8 lg:px-16">
         <div className="flex items-center space-x-2.5">
           <A
             href="/"
-            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
+            className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-text-primary"
           >
             <Logo />
             <span className="-mt-0.5">Bytesmarts-web</span>
           </A>
-          <Label text="Beta" />
         </div>
         <div className="inline-flex lg:hidden">
           <ColorSchemeSwitcher />
@@ -95,19 +96,19 @@ export const MainNavigation = () => {
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
-            className="flex h-8 w-8 items-center justify-end text-slate-600 dark:text-slate-300"
+            className="flex h-8 w-8 items-center justify-end text-text-primary dark:text-slate-300"
           >
             <span className="inline-block w-4">
-              <Icon name={open ? "close" : "bars"} />
+              <IconFont type={open ? "icon-close" : "icon-menu"} />
             </span>
           </button>
           {open && (
             <div className="fixed inset-0 top-[65px] z-50 h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
               <nav className="absolute right-0 h-full divide-y divide-gray-200 border-l border-gray-200 bg-white p-8 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
                 <div className="flex flex-col items-end space-y-2 pb-8">
-                  <div className="mb-2">
+                  {/* <div className="mb-2">
                     <SearchButton showShortcut={false} />
-                  </div>
+                  </div> */}
                   {navLinks.map(({ label, url }, index) => (
                     <NavLink
                       key={index}
@@ -121,7 +122,7 @@ export const MainNavigation = () => {
             </div>
           )}
         </div>
-        <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 lg:flex">
+        <nav className="hidden items-center divide-x divide-gray-200 text-text-primary dark:divide-gray-800 lg:flex">
           <div className="flex items-center pr-2 lg:space-x-4 lg:pr-8">
             {navLinks.map(({ label, url }, index) => (
               <NavLink
@@ -131,9 +132,9 @@ export const MainNavigation = () => {
                 icon={isExternalUrl(url) ? "external-link" : undefined}
               />
             ))}
-            <div className="px-3">
+            {/* <div className="px-3">
               <SearchButton />
-            </div>
+            </div> */}
           </div>
           <ColorSchemeSwitcher />
         </nav>

@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 import { MainNavigation } from "../../common/MainNavigation";
 import { Footer } from "../../common/Footer";
 import { DocsMain } from "../../docs";
-import { TreeNode } from "@/types/TreeNode";
+import { TreeNode } from "types/TreeNode";
 import { DocsLayoutProvider } from "./container";
 
 export type DocsLayoutProps = {

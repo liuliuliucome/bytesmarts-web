@@ -1,9 +1,9 @@
 import { allDocs } from "contentlayer/generated";
-import { LocalType, LocalesUtil } from "./LocalesUtil";
+import { LocalesUtil } from "./LocalesUtil";
 import { find } from "lodash";
 import { buildDocsTree } from "./build-docs-tree";
 
-const withLangDocs = (lang: LocalType) =>
+const withLangDocs = (lang: I18n.Locale) =>
   allDocs.filter((item) => item.locale === lang);
 
 export function getDocsPageProps(props: Page.DocsSlugPageProps) {
@@ -15,7 +15,7 @@ export function getDocsPageProps(props: Page.DocsSlugPageProps) {
 
   const doc = find(allWithLangDocs, ["reativeRoute", reativeRoute]);
   // Do not include top-level nodes, directly search for them from root development
-  const tree = buildDocsTree(allWithLangDocs, "docs");
+  const tree = buildDocsTree(allWithLangDocs, "");
 
   const breadcrumbs: Array<Page.BreadcrumbType> = [];
   if (doc) {

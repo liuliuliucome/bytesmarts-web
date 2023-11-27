@@ -4,7 +4,7 @@ import { omit } from "lodash";
  *
  * @param {import('contentlayer/generated').Docs[]} docs
  * @param {string} parentPathNames
- * @returns {import('@/types/TreeNode').TreeNode[]}
+ * @returns {import('types/TreeNode').TreeNode[]}
  */
 export const buildDocsTree = (docs, parentPath = "") => {
   return docs
@@ -15,7 +15,8 @@ export const buildDocsTree = (docs, parentPath = "") => {
         title: doc.title,
         label: doc.label ?? null,
         excerpt: doc.excerpt ?? null,
-        urlPath: doc.href,
+        // 带上 locale
+        urlPath: doc.fullHref,
         collapsible: doc.collapsible ?? null,
         collapsed: doc.collapsed ?? null,
         children: buildDocsTree(docs, doc.route),

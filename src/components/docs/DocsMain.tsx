@@ -38,10 +38,11 @@ export function DocsMain() {
   const MDXContent = useMDXComponent(doc.body.code || "");
 
   return (
-    <div className="relative mx-auto w-full max-w-screen-2xl lg:flex lg:items-start">
+    <div className="relative mr-auto w-full max-w-screen-2xl lg:flex lg:items-start">
       <div
+        data-testid="DocsSidebar"
         style={{ height: "calc(100vh - 64px)" }}
-        className="sticky top-16 hidden shrink-0 border-r border-gray-200 dark:border-gray-800 lg:block"
+        className="sticky top-16 hidden shrink-0 border-r border-gray-200 bg-secondary dark:border-gray-800 lg:block"
       >
         <div className="-ml-3 h-full overflow-y-scroll p-8 pl-16">
           <DocsNavigation />

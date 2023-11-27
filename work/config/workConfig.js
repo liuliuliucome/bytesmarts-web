@@ -1,9 +1,6 @@
 const pkg = require("package.json");
 const env = (val, defaultV = "") => val || defaultV;
-/**
- * @type {Readonly<Array<'zh' | 'en'>>}
- */
-const locales = ["zh", "en"];
+const i18nConfig = require("./i18n.config");
 
 const workConfig = {
   /**
@@ -24,13 +21,7 @@ const workConfig = {
    */
   siteURL: env(process.env.NEXT_PUBLIC_SITE_URL),
 
-  i18n: {
-    locales: locales,
-    /**
-     * @type {typeof locales[number]}
-     */
-    defaultLocale: locales[0],
-  },
+  i18n: i18nConfig,
 };
 
 module.exports = workConfig;

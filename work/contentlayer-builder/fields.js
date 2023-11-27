@@ -1,12 +1,12 @@
-import { slug } from "github-slugger";
+import i18nConfig from "../config/i18n.config";
 
-const locales = ["zh", "en"];
-const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
-const defaultLocale = "zh";
+const { localUrlReg, defaultLocale } = i18nConfig;
+
 const getMatchLocale = (path) => {
   const matched = path.match(localUrlReg);
   return matched ? matched[1] || defaultLocale : defaultLocale;
 };
+
 /**
  *
  * @param {import('contentlayer/source-files').LocalDocument} doc
@@ -85,7 +85,7 @@ export const computedFields = {
    */
   href: {
     type: "string",
-    resolve: (doc) => "/" + getPaths(doc).join("/"),
+    resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
   },
   /**
    * HTMLLinkElement href attr(absoulte)
@@ -94,7 +94,7 @@ export const computedFields = {
     type: "string",
     resolve: (doc) => {
       const matchLocale = getMatchLocale(doc._raw.flattenedPath);
-      const paths = ["docs", ...getPaths(doc, 1)];
+      const paths = [...getPaths(doc, 1)];
 
       // filter default local
       if (matchLocale != defaultLocale) {

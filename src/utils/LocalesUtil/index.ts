@@ -1,13 +1,10 @@
-import workConfig from "config/workConfig";
+import i18nConfig from "config/i18n.config";
 import { isString } from "lodash";
 
-export type LocalType = (typeof locales)[number];
-
-const { locales, defaultLocale } = workConfig.i18n;
-const localUrlReg = new RegExp(`\\.(${locales.join("|")})`);
+const { locales, defaultLocale, localUrlReg } = i18nConfig;
 
 export class LocalesUtil {
-  static toLocale(lang: string | undefined): LocalType {
+  static toLocale(lang: string | undefined): I18n.Locale {
     const value = isString(lang) ? lang.toLocaleLowerCase() : "";
     return value && LocalesUtil.isLocale(value) ? value : defaultLocale;
   }
@@ -16,11 +13,11 @@ export class LocalesUtil {
     return locales;
   }
 
-  static isLocale(value?: string): value is LocalType {
-    return isString(value) && !!value && locales.includes(value as LocalType);
+  static isLocale(value?: string): value is I18n.Locale {
+    return isString(value) && !!value && locales.includes(value as I18n.Locale);
   }
 
-  static wrapLocale(value: string): LocalType {
+  static wrapLocale(value: string): I18n.Locale {
     if (LocalesUtil.isLocale(value)) {
       return value;
     }
