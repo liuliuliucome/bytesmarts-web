@@ -30,9 +30,6 @@ export default async function Docs(props: Page.DocsProps) {
     notFound();
   }
 
-  console.log("allDocs", allDocs);
-  console.log("doc", doc);
-
   return (
     <DocsLayout
       breadcrumbs={breadcrumbs}

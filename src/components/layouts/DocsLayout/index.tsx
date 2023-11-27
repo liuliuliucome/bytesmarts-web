@@ -17,6 +17,9 @@ export type DocsLayoutProps = {
 
 export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   const { children, ...reset } = props;
+  console.log("allDocs", reset.allDocs);
+  console.log("doc", reset.doc);
+
   return (
     <DocsLayoutProvider initialState={reset}>
       <MainNavigation />
