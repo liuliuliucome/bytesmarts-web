@@ -32,21 +32,20 @@ export default IconFont;
   return indexPath;
 }
 
-function genIconFontType(params) {
-  axios(iconFontJson.css).then((cssText) => {
-    const cssTextStr = cssText.data;
-    if (typeof cssTextStr === "string") {
-      const iconTypes = cssTextStr
-        .match(classNamesReg)
-        .map((className) => {
-          return "'" + className.replace(".", "").replace(":before", "") + "'";
-        })
-        .join(" | ");
-      const indexPath = createIconFont(iconTypes);
+async function genIconFontType(params) {
+  const cssText = await axios(iconFontJson.css);
+  const cssTextStr = cssText.data;
+  if (typeof cssTextStr === "string") {
+    const iconTypes = cssTextStr
+      .match(classNamesReg)
+      .map((className) => {
+        return "'" + className.replace(".", "").replace(":before", "") + "'";
+      })
+      .join(" | ");
+    const indexPath = createIconFont(iconTypes);
 
-      console.log("[genIconFontType] success", indexPath);
-    }
-  });
+    console.log("[genIconFontType] success", indexPath);
+  }
 }
 
 module.exports = { genIconFontType };
