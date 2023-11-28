@@ -26,8 +26,12 @@ export const urlFromFilePath = (doc) => {
  * @returns {Promise<Date>}
  */
 export const getLastEditedDate = async (doc) => {
+  if (doc.date) {
+    return new Date(doc.date);
+  }
+
   const stats = await fs.stat(
-    path.join(contentDirPath, doc._raw.sourceFilePath)
+    path.join(contentDirPath, doc._raw.sourceFilePath),
   );
   return stats.mtime;
 };

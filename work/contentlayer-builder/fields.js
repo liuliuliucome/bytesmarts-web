@@ -60,6 +60,9 @@ export const commonFields = {
   nav_title: {
     type: "string",
   },
+  date: {
+    type: "string",
+  },
 };
 
 /** @type {import('contentlayer/source-files').ComputedFields} */

@@ -12,7 +12,8 @@
     "lint": "next lint",
     "work:gen": "node ./work/bin/gen.js",
     "format": "prettier --write ./src",
-    "pages:build": "contentlayer build && npx @cloudflare/next-on-pages"
+    "pages:build": "contentlayer build && npx @cloudflare/next-on-pages",
+    "playwright:install": "yarn playwright install"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",

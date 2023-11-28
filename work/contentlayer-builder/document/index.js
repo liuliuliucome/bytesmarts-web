@@ -1,3 +1,3 @@
 export { Docs } from "./Docs";
-export { Home } from "./Home";
 export { Page } from "./Page";
+export { Blogs } from "./Blogs";
