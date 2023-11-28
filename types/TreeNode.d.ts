@@ -5,8 +5,8 @@ export type TreeNode = {
   excerpt: string | null;
   urlPath: string;
   children: TreeNode[];
-  collapsible: boolean | null;
-  collapsed: boolean | null;
+  collapsible?: boolean | null;
+  collapsed?: boolean | null;
   metaData?: MDX.With<MDX.CommonFileds>;
-  level: number
+  level: number;
 };

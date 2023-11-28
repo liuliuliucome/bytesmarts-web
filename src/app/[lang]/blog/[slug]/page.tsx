@@ -32,7 +32,6 @@ export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   const { allDocs, doc, breadcrumbs, docTree } = getBlogsPageProps(props);
-  console.log("allDocs, doc", allDocs, doc);
 
   if (!doc) {
     notFound();
