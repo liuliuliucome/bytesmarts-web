@@ -12,9 +12,5 @@ export const getNodeText = (node: React.ReactNode): string => {
   if (typeof node === "object" && (node as any)?.props?.children)
     return getNodeText((node as any).props.children);
 
-  // console.log(node)
-  // console.error(`Should be never reached`)
-  // debugger
-
   return "";
 };

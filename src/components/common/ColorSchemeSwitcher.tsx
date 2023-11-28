@@ -21,7 +21,6 @@ export const ColorSchemeSwitcher = () => {
       document.documentElement.classList.add("scroll-padding");
     }
   };
-  console.log("theme", theme);
 
   const onChangeTheme = useCallback(
     (theme: ThemeValueType) => {

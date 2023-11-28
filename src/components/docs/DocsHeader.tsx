@@ -5,6 +5,7 @@ import { Icon } from "../common/Icon";
 import { usePathname } from "next/navigation";
 import { useDocsLayout } from "../layouts/DocsLayout/container";
 import classNames from "classnames";
+import IconFont from "../common/IconFont";
 
 export const DocsHeader: FC<{
   title: string;
@@ -68,7 +69,7 @@ export const DocsHeader: FC<{
         </div>
       </header>
       {open && (
-        <div className="fixed inset-0 z-50 h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
+        <div className="fixed inset-0 z-50 h-screen bg-gray-950/10 pb-20 text-text-primary backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
           <div className="absolute left-0 h-full divide-y divide-gray-200 overflow-y-scroll border-l border-gray-200 bg-white p-4 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
             <div className="flex items-center justify-between pb-2">
               <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
@@ -78,11 +79,9 @@ export const DocsHeader: FC<{
                 type="button"
                 aria-label="Close docs navigation"
                 onClick={() => setOpen(!open)}
-                className="flex h-8 w-8 items-center justify-end text-slate-600 dark:text-slate-300"
+                className="flex h-8 w-8 items-center justify-end"
               >
-                <span className="inline-block w-4">
-                  <Icon name="close" />
-                </span>
+                <IconFont type="icon-close" className="inline-block w-4" />
               </button>
             </div>
             <div className="pt-4">
