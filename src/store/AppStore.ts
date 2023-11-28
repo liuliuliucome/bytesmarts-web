@@ -2,6 +2,7 @@ import { ThemeValues, getThemesList } from "@/components/ThemeContainer/conts";
 import i18nConfig from "config/i18n.config";
 import { APP_LOCALE_STORAGE_KEY, APP_THEME_STORAGE_KEY } from "./const";
 import { SliceStore } from "@/lib/slice-store";
+import { LocalesUtil } from "@/utils";
 
 class AppStoreState {
   theme: ThemeValues;
@@ -51,12 +52,15 @@ export class AppStore extends SliceStore<AppStoreState> {
     localStorage.setItem(APP_THEME_STORAGE_KEY, value);
   }
 
-  init() {
+  init(props?: { lang?: I18n.Locale }) {
     this.setup(() => {
       const theme = this.getDefaultTheme();
-      const lang = this.getDefaultLocale();
+      // const lang =
+      //   props?.lang && LocalesUtil.isLocale(props?.lang)
+      //     ? props.lang
+      //     : this.getDefaultLocale();
 
-      this.emit(new AppStoreState(theme, lang));
+      // this.emit(new AppStoreState(theme, lang));
 
       // rerender ui
       AppStore.setLocalTheme(theme);

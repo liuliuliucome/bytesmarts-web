@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "rimraf .contentlayer && contentlayer build && next dev -p 3103",
-    "clean": "rimraf node_modules yarn.lock package-lock.json .contentlayer .next",
+    "clean": "yarn playwright:clean && rimraf node_modules yarn.lock package-lock.json .contentlayer .next",
     "build:content": "contentlayer build",
     "build": "work:gen && next build",
     "preview": "next build && next start",
@@ -13,7 +13,8 @@
     "work:gen": "node ./work/bin/gen.js",
     "format": "prettier --write ./src",
     "pages:build": "contentlayer build && npx @cloudflare/next-on-pages",
-    "playwright:install": "yarn playwright install"
+    "playwright:install": "yarn playwright install",
+    "playwright:clean": "rimraf playwright-report test-results"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",

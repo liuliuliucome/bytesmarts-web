@@ -10,6 +10,12 @@ declare namespace Page {
       lang?: LocalType;
     };
   }
+  interface BlogsSlugPageProps {
+    params: {
+      slug: string;
+      lang?: LocalType;
+    };
+  }
 
   type DocsProps = {
     params: {
