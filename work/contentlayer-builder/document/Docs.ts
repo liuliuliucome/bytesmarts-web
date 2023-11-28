@@ -1,5 +1,4 @@
 import { defineDocumentType } from "contentlayer/source-files";
-import { getLastEditedDate, urlFromFilePath } from "../utils";
 import { bundleMDX } from "mdx-bundler";
 import { toMarkdown } from "mdast-util-to-markdown";
 import { mdxToMarkdown } from "mdast-util-mdx";
@@ -13,12 +12,12 @@ const tocPlugin =
   () => {
     return (node: any) => {
       for (const element of node.children.filter(
-        (_: any) => _.type === "heading" || _.name === "OptionsTable"
+        (_: any) => _.type === "heading" || _.name === "OptionsTable",
       )) {
         if (element.type === "heading") {
           const title = toMarkdown(
             { type: "paragraph", children: element.children },
-            { extensions: [mdxToMarkdown()] }
+            { extensions: [mdxToMarkdown()] },
           )
             .trim()
             .replace(/<.*$/g, "")
@@ -34,7 +33,7 @@ const tocPlugin =
                 .forEach((heading: any) => {
                   const title = toMarkdown(
                     { type: "paragraph", children: heading.children },
-                    { extensions: [mdxToMarkdown()] }
+                    { extensions: [mdxToMarkdown()] },
                   )
                     .trim()
                     .replace(/<.*$/g, "")
@@ -55,20 +54,6 @@ export const Docs = defineDocumentType(() => ({
   fields: commonFields,
   computedFields: {
     ...computedFields,
-    pathSegments: {
-      type: "json",
-      resolve: (doc) =>
-        urlFromFilePath(doc)
-          .split("/")
-          // skip `/docs` prefix
-          .slice(2)
-          .map((dirName) => {
-            const re = /^((\d+)-)?(.*)$/;
-            const [, , orderStr, pathName] = dirName.match(re) ?? [];
-            const order = orderStr ? parseInt(orderStr) : 0;
-            return { order, pathName };
-          }),
-    },
     headings: {
       type: "json",
       resolve: async (doc) => {
@@ -88,6 +73,5 @@ export const Docs = defineDocumentType(() => ({
         return [{ level: 1, title: doc.title }, ...headings];
       },
     },
-    last_edited: { type: "date", resolve: getLastEditedDate },
   },
 }));

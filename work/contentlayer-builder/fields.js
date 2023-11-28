@@ -1,4 +1,5 @@
 import i18nConfig from "../config/i18n.config";
+import { getLastEditedDate } from "./utils";
 
 const { localUrlReg, defaultLocale } = i18nConfig;
 
@@ -63,14 +64,15 @@ export const commonFields = {
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
+  last_edited: { type: "date", resolve: getLastEditedDate },
   slug: {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
   },
-  slugAsParams: {
-    type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
+  // slugAsParams: {
+  //   type: "string",
+  //   resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+  // },
   locale: {
     type: "string",
     resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
@@ -95,10 +97,10 @@ export const computedFields = {
   /**
    * HTMLLinkElement href attr
    */
-  href: {
-    type: "string",
-    resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
-  },
+  // href: {
+  //   type: "string",
+  //   resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
+  // },
   /**
    * HTMLLinkElement href attr(absoulte)
    */
