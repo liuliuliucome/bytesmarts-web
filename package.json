@@ -6,7 +6,7 @@
     "dev": "rimraf .contentlayer && contentlayer build && next dev -p 3103",
     "clean": "rimraf node_modules yarn.lock package-lock.json .contentlayer .next",
     "build:content": "contentlayer build",
-    "build": "next build",
+    "build": "work:gen && next build",
     "preview": "next build && next start",
     "start": "next start",
     "lint": "next lint",
