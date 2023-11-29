@@ -12,7 +12,7 @@ declare namespace Page {
   }
   interface BlogsSlugPageProps {
     params: {
-      slug: string;
+      slug?: string;
       lang?: LocalType;
     };
   }

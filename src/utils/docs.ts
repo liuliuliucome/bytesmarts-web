@@ -86,11 +86,14 @@ export function getBlogsPageProps(props: Page.BlogsSlugPageProps) {
   const lang = LocalesUtil.toLocale(params.lang);
 
   const docs = withLangBlogs(lang);
-  const reativeRoute = params.slug;
+  const writeDocs = docs.map((item) => ({ ...item, body: null }));
+  console.log("writeDocs", writeDocs);
+
+  const reativeRoute = params.slug || "blogs";
 
   const doc = find(docs, ["reativeRoute", reativeRoute]);
   // Do not include top-level nodes, directly search for them from root development
-  const tree = buildBlogsTree(docs, "");
+  const tree = buildBlogsTree(docs, "blogs");
 
   const breadcrumbs: Array<Page.BreadcrumbType> = [];
   if (doc) {

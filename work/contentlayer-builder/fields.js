@@ -111,7 +111,10 @@ export const computedFields = {
     type: "string",
     resolve: (doc) => {
       const matchLocale = getMatchLocale(doc._raw.flattenedPath);
-      const paths = [...getPaths(doc, 1)];
+      const paths = [
+        // docs 目录下的去掉 content 根目录，其他的保留
+        ...getPaths(doc, doc._raw.sourceFileDir.startsWith("docs") ? 1 : 0),
+      ];
 
       // filter default local
       if (matchLocale != defaultLocale) {

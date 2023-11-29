@@ -1,7 +1,6 @@
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { BlogsLayout } from "@/components/layouts/BlogsLayout";
 import { getBlogsPageProps } from "@/utils/docs";
+import { BlogsLayout } from "@/components/layouts/BlogsLayout";
 
 // export const dynamicParams = false;
 
@@ -20,28 +19,15 @@ export async function generateMetadata(
   };
 }
 
-export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
-  const { allDocs } = getBlogsPageProps(props);
-
-  return allDocs.map((docs) => {
-    return {
-      slug: docs.reativeRoute.split("/"),
-    };
-  });
-}
-
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
+  console.log("props", props);
   const { allDocs, doc, breadcrumbs, docTree } = getBlogsPageProps(props);
-
-  if (!doc) {
-    notFound();
-  }
 
   return (
     <BlogsLayout
       breadcrumbs={breadcrumbs}
       allDocs={allDocs}
-      doc={doc}
+      doc={allDocs[0]}
       tree={docTree}
     />
   );
