@@ -1,12 +1,11 @@
-import { Docs } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { A } from "../common";
 import Image from "next/image";
 import { DocsNavigation } from "./DocsNavigation";
-import { useDocsLayout } from "../layouts/DocsLayout/container";
 import { DocsHeader } from "./DocsHeader";
 import { H2, H3, H4 } from "./Headings";
 import { Relation } from "./Relation";
+import { A } from "@/components/common";
+import { useBlogsLayout } from "../container";
 
 const Section = (props: { children: React.ReactNode }) => (
   <div>{props.children}</div>
@@ -34,7 +33,7 @@ const mdxComponents = {
 };
 
 export function DocsMain() {
-  const { doc, tree } = useDocsLayout();
+  const { doc, tree } = useBlogsLayout();
   const MDXContent = useMDXComponent(doc.body.code || "");
 
   return (

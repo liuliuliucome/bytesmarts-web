@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { DocsLayout } from "@/components/layouts/DocsLayout";
+import { BlogsLayout } from "@/components/layouts/BlogsLayout";
 import { getBlogsPageProps } from "@/utils/docs";
 
 // export const dynamicParams = false;
@@ -38,7 +38,7 @@ export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   }
 
   return (
-    <DocsLayout
+    <BlogsLayout
       breadcrumbs={breadcrumbs}
       allDocs={allDocs}
       doc={doc}

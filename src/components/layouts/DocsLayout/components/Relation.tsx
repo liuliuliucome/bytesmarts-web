@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 // import Image, { ImageProps } from "next/image";
-import { A, HrefType } from "../common";
+import { A, HrefType } from "@/components/common";
 import mapChildren from "@/utils/mapChildren";
 import { isString } from "lodash";
-import IconFont from "../common/IconFont";
+import IconFont from "@/components/common/IconFont";
 import { ImgHTMLAttributes } from "react";
 
 type RelationProps = {

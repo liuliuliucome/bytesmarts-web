@@ -1,21 +1,21 @@
 "use client";
 
-import { Docs } from "contentlayer/generated";
+import { Blogs } from "contentlayer/generated";
 import { PropsWithChildren, useEffect } from "react";
-import { MainNavigation } from "@/components/common/MainNavigation";
 import { Footer } from "@/components/common/Footer";
-import { DocsMain } from "./components";
 import { TreeNode } from "types/TreeNode";
-import { DocsLayoutProvider } from "./container";
+import { BlogsLayoutProvider } from "./container";
+import { DocsMain } from "./components";
+import { MainNavigation } from "@/components/common/MainNavigation";
 
-export type DocsLayoutProps = {
-  doc: Docs;
-  allDocs: Docs[];
+export type BlogsLayoutProps = {
+  doc: Blogs;
+  allDocs: Blogs[];
   breadcrumbs: Page.BreadcrumbType[];
   tree: TreeNode[];
 };
 
-export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
+export function BlogsLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   }, [reset]);
 
   return (
-    <DocsLayoutProvider initialState={reset}>
+    <BlogsLayoutProvider initialState={reset}>
       <MainNavigation />
       <div className="flex min-h-screen flex-col justify-between">
         <main className="relative pt-16" style={{ scrollPaddingTop: "150px" }}>
@@ -31,6 +31,6 @@ export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
         </main>
         <Footer />
       </div>
-    </DocsLayoutProvider>
+    </BlogsLayoutProvider>
   );
 }

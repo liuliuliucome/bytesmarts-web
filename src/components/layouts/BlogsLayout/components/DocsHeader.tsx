@@ -1,16 +1,18 @@
 import { FC, Fragment, useState, useEffect } from "react";
 import Link from "next/link";
 import { DocsNavigation } from "./DocsNavigation";
-import { Icon } from "../common/Icon";
+
 import { usePathname } from "next/navigation";
-import { useDocsLayout } from "../layouts/DocsLayout/container";
+
 import classNames from "classnames";
-import IconFont from "../common/IconFont";
+import { useBlogsLayout } from "../container";
+import { Icon } from "@/components/common/Icon";
+import IconFont from "@/components/common/IconFont";
 
 export const DocsHeader: FC<{
   title: string;
 }> = ({ title }) => {
-  const { tree, breadcrumbs } = useDocsLayout();
+  const { tree, breadcrumbs } = useBlogsLayout();
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [top, setTop] = useState<boolean>(true);
