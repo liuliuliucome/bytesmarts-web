@@ -1,7 +1,7 @@
 "use client";
 
 import { Blogs } from "contentlayer/generated";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 import { Footer } from "@/components/common/Footer";
 import { TreeNode } from "types/TreeNode";
 import { BlogsLayoutProvider } from "./container";
@@ -17,10 +17,6 @@ export type BlogsLayoutProps = {
 
 export function BlogsLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
-
-  useEffect(() => {
-    console.log(reset);
-  }, [reset]);
 
   return (
     <BlogsLayoutProvider initialState={reset}>

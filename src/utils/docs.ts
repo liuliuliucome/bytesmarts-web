@@ -87,7 +87,6 @@ export function getBlogsPageProps(props: Page.BlogsSlugPageProps) {
 
   const docs = withLangBlogs(lang);
   const writeDocs = docs.map((item) => ({ ...item, body: null }));
-  console.log("writeDocs", writeDocs);
 
   const reativeRoute = params.slug || "blogs";
 

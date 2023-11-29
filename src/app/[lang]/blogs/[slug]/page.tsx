@@ -34,7 +34,6 @@ export async function generateMetadata(
 // }
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
-  console.log("props", props);
   const { allDocs, doc, breadcrumbs, docTree } = getBlogsPageProps(props);
 
   if (!doc) {
