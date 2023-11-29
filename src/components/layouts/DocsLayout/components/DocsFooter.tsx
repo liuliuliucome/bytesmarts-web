@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import { Icon } from "../common/Icon";
+import { Icon } from "@/components/common/Icon";
 import { format } from "date-fns";
 import { Docs } from "contentlayer/generated";
 

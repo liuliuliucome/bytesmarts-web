@@ -7,12 +7,13 @@ import { Logo } from "./Logo";
 import { A } from "./A";
 import { ColorSchemeSwitcher } from "./ColorSchemeSwitcher";
 import IconFont from "./IconFont";
+import { LangSwitcher } from "./LangSwitcher";
 
 const navLinks: Array<{ label: string; url: string }> = [
-  { label: "Documentation", url: "/docs" },
+  { label: "Documentation", url: "/" },
   //
   // Removing this temporarily, until it is more active.
-  // { label: 'Blog', url: '/blog' },
+  { label: "Blogs", url: "/blogs" },
   //
   // NOTE until we have a proper example overview page and multiple examples, link directly to Next.js example
   // { label: "Examples", url: "/examples/nextjs" },
@@ -92,6 +93,7 @@ export const MainNavigation = () => {
         </div>
         <div className="inline-flex lg:hidden">
           <ColorSchemeSwitcher />
+          <LangSwitcher />
           <button
             type="button"
             aria-label="Toggle menu"
@@ -137,6 +139,7 @@ export const MainNavigation = () => {
             </div> */}
           </div>
           <ColorSchemeSwitcher />
+          <LangSwitcher />
         </nav>
       </div>
     </header>

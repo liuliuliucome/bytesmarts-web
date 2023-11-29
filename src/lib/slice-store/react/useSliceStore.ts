@@ -1,11 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SliceStore } from "../core/SliceStore";
 
 function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === "function";
 }
 
-export function useSliceStore<T>(store: SliceStore<T>) {
+export function useSliceStore<T>(
+  sliceStore: SliceStore<T> | (() => SliceStore<T>),
+) {
+  const store = useMemo(() => {
+    if (isFunction(sliceStore)) {
+      return sliceStore();
+    }
+    return sliceStore;
+  }, [sliceStore]);
+
   const storeState = useState<T>(store.state);
 
   const [_storeState, _setStoreState] = storeState;

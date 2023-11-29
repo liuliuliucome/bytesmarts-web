@@ -2,12 +2,12 @@ import React, { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
-import { Label } from "../common/Label";
-import { Icon } from "../common/Icon";
+import { Label } from "@/components/common/Label";
+import { Icon } from "@/components/common/Icon";
 import { TreeNode } from "types/TreeNode";
-import { useDocsLayout } from "../layouts/DocsLayout/container";
+import { useDocsLayout } from "../container";
 import { get } from "lodash";
-import IconFont from "../common/IconFont";
+import IconFont from "@/components/common/IconFont";
 
 const NavLink: FC<{
   title: string;

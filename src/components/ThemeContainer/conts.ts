@@ -13,6 +13,12 @@ export const getThemesList = () => [
   ThemeValues.SYSTEM,
 ];
 
+export const ThemesOptions = [
+  { label: "light", value: ThemeValues.LIGHT, iconFont: "icon-qingtian" },
+  { label: "dark", value: ThemeValues.DARK, iconFont: "icon-yueliang" },
+  { label: "system", value: ThemeValues.SYSTEM, iconFont: "icon-system" },
+];
+
 export const defaultThemeState = (): ThemeState => ({
   themes: getThemesList(),
   // forcedTheme:

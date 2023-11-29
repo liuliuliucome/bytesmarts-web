@@ -1,4 +1,5 @@
 import i18nConfig from "../config/i18n.config";
+import { getLastEditedDate } from "./utils";
 
 const { localUrlReg, defaultLocale } = i18nConfig;
 
@@ -59,18 +60,22 @@ export const commonFields = {
   nav_title: {
     type: "string",
   },
+  date: {
+    type: "string",
+  },
 };
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
+  last_edited: { type: "date", resolve: getLastEditedDate },
   slug: {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
   },
-  slugAsParams: {
-    type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
+  // slugAsParams: {
+  //   type: "string",
+  //   resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+  // },
   locale: {
     type: "string",
     resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
@@ -95,10 +100,10 @@ export const computedFields = {
   /**
    * HTMLLinkElement href attr
    */
-  href: {
-    type: "string",
-    resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
-  },
+  // href: {
+  //   type: "string",
+  //   resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
+  // },
   /**
    * HTMLLinkElement href attr(absoulte)
    */
@@ -106,7 +111,10 @@ export const computedFields = {
     type: "string",
     resolve: (doc) => {
       const matchLocale = getMatchLocale(doc._raw.flattenedPath);
-      const paths = [...getPaths(doc, 1)];
+      const paths = [
+        // docs 目录下的去掉 content 根目录，其他的保留
+        ...getPaths(doc, doc._raw.sourceFileDir.startsWith("docs") ? 1 : 0),
+      ];
 
       // filter default local
       if (matchLocale != defaultLocale) {

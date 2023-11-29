@@ -2,9 +2,9 @@
 
 import { Docs } from "contentlayer/generated";
 import { PropsWithChildren } from "react";
-import { MainNavigation } from "../../common/MainNavigation";
-import { Footer } from "../../common/Footer";
-import { DocsMain } from "../../docs";
+import { MainNavigation } from "@/components/common/MainNavigation";
+import { Footer } from "@/components/common/Footer";
+import { DocsMain } from "./components";
 import { TreeNode } from "types/TreeNode";
 import { DocsLayoutProvider } from "./container";
 
@@ -17,6 +17,7 @@ export type DocsLayoutProps = {
 
 export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   const { children, ...reset } = props;
+
   return (
     <DocsLayoutProvider initialState={reset}>
       <MainNavigation />

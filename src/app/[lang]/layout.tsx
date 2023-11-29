@@ -3,8 +3,10 @@ import "@/styles/sass/index.scss";
 import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 import iconFontJson from "work/config/iconFont.json";
 import Script from "next/script";
+import { LocalesUtil } from "@/utils";
 
-export const runtime = "edge";
+// export const runtime = "nodejs";
+// export const dynamic = "force-static";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,17 +15,21 @@ export const metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode;
+  params: {
+    lang?: I18n.Locale;
+  };
 }
 
 export default function RootLayout(props: RootLayoutProps) {
-  const { children } = props;
+  const { children, params } = props;
+  const lang = LocalesUtil.toLocale(params.lang);
 
   return (
     // https://github.com/vercel/next.js/issues/49350
     // TODO: next-theme 引起，还未彻底解决
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body>
-        <BaseContentLayout>{children}</BaseContentLayout>
+        <BaseContentLayout lang={lang}>{children}</BaseContentLayout>
         {/* FIXME: 在现有版本中， build 后 next 会将自动创建的 script 标签去掉，道中 iconfont.js 无法被加载， 且需要是最后一个script  */}
         <Script id="iconfont-id" src={iconFontJson.js} />
       </body>
