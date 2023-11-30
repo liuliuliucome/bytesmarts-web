@@ -92,7 +92,7 @@ export const DocsHeader: FC<{
       )}
       <div
         className={classNames(
-          "fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 bg-primary backdrop-blur backdrop-filter transition-opacity duration-200 dark:border-gray-600 lg:block",
+          "fixed top-16 z-10 hidden h-16 w-full border-b border-gray-200 bg-primary backdrop-blur backdrop-filter transition-opacity duration-200 dark:border-gray-600",
           top ? "opacity-0" : "opacity-100",
         )}
       >
