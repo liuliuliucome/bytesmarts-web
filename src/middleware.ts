@@ -6,12 +6,10 @@ export async function middleware(request: NextRequest) {
 
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
-
   const pathnameIsMissingLocale = locales.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
-
   // Redirect to default locale if there is no supported locale prefix
   if (pathnameIsMissingLocale) {
     return NextResponse.rewrite(
@@ -20,7 +18,11 @@ export async function middleware(request: NextRequest) {
   }
 }
 
+/**
+ * @see https://nextjs.org/docs/app/building-your-application/routing/middleware
+ */
 export const config = {
   // Do not localize these paths
-  matcher: ["/((?!api|_next/static|slice-simulator|favicon.ico).*)"],
+  // matcher: ["/((?!api|_next/static|slice-simulator|favicon.ico).*)"],
+  matcher: ["/((?!api|_next|favicon.ico).*)"],
 };

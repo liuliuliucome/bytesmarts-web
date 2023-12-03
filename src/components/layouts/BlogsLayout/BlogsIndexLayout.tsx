@@ -6,6 +6,7 @@ import { TreeNode } from "types/TreeNode";
 import { BlogsLayoutProvider } from "./container";
 import { BlogMain } from "./components";
 import { MainNavigation } from "@/components/common/MainNavigation";
+import { BlogsIndexContent } from "./components/BlogIndexContent";
 
 export type BlogsLayoutProps = {
   doc: Blogs;
@@ -14,7 +15,7 @@ export type BlogsLayoutProps = {
   tree: TreeNode[];
 };
 
-export function BlogsLayout(props: PropsWithChildren<BlogsLayoutProps>) {
+export function BlogsIndexLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
 
   return (
@@ -22,7 +23,7 @@ export function BlogsLayout(props: PropsWithChildren<BlogsLayoutProps>) {
       <MainNavigation />
       <div className="flex min-h-screen flex-col justify-between">
         <main className="relative pt-16" style={{ scrollPaddingTop: "150px" }}>
-          <BlogMain />
+          <BlogsIndexContent />
         </main>
         <Footer />
       </div>

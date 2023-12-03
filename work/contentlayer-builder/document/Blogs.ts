@@ -51,7 +51,15 @@ export const Blogs = defineDocumentType(() => ({
   name: "Blogs",
   filePathPattern: `blog/**/*.mdx`,
   contentType: "mdx",
-  fields: commonFields,
+  fields: {
+    ...commonFields,
+    author: {
+      type: "string",
+    },
+    authorLogo: {
+      type: "string",
+    },
+  },
   computedFields: {
     ...computedFields,
     headings: {
