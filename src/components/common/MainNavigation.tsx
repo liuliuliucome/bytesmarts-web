@@ -13,7 +13,7 @@ const navLinks: Array<{ label: string; url: string }> = [
   { label: "Documentation", url: "/" },
   //
   // Removing this temporarily, until it is more active.
-  { label: "Blogs", url: "/blogs" },
+  { label: "Blogs", url: "/blog" },
   //
   // NOTE until we have a proper example overview page and multiple examples, link directly to Next.js example
   // { label: "Examples", url: "/examples/nextjs" },

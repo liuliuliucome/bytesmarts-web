@@ -88,11 +88,11 @@ export function getBlogsPageProps(props: Page.BlogsSlugPageProps) {
   const docs = withLangBlogs(lang);
   const writeDocs = docs.map((item) => ({ ...item, body: null }));
 
-  const reativeRoute = params.slug || "blogs";
+  const reativeRoute = params.slug || "blog";
 
   const doc = find(docs, ["reativeRoute", reativeRoute]);
   // Do not include top-level nodes, directly search for them from root development
-  const tree = buildBlogsTree(docs, "blogs");
+  const tree = buildBlogsTree(docs, "blog");
 
   const breadcrumbs: Array<Page.BreadcrumbType> = [];
   if (doc) {

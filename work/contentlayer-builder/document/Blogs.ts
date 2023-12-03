@@ -49,7 +49,7 @@ const tocPlugin =
 
 export const Blogs = defineDocumentType(() => ({
   name: "Blogs",
-  filePathPattern: `blogs/**/*.mdx`,
+  filePathPattern: `blog/**/*.mdx`,
   contentType: "mdx",
   fields: commonFields,
   computedFields: {
