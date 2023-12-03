@@ -26,9 +26,7 @@ export const LangSwitcher = () => {
   const renderItem = useCallback((option: LangOption) => {
     return (
       <>
-        <span className="block w-4">
-          <IconFont type={option.iconFont} />
-        </span>
+        <IconFont type={option.iconFont} />
         <span>{option.label}</span>
       </>
     );
@@ -41,9 +39,7 @@ export const LangSwitcher = () => {
       onSelect={onChangeTheme}
       renderItem={renderItem}
     >
-      <span className="block w-4">
-        {targetLocale ? <IconFont type={targetLocale.iconFont} /> : null}
-      </span>
+      {targetLocale ? <IconFont type={targetLocale.iconFont} /> : null}
     </Select>
   );
 };

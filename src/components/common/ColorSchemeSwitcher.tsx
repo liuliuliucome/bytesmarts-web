@@ -19,9 +19,7 @@ export const ColorSchemeSwitcher = () => {
   const renderItem = useCallback((option: ThemeOption) => {
     return (
       <>
-        <span className="block w-4">
-          <IconFont type={option.iconFont} />
-        </span>
+        <IconFont type={option.iconFont} />
         <span>{option.label}</span>
       </>
     );
@@ -36,9 +34,7 @@ export const ColorSchemeSwitcher = () => {
       onSelect={onChangeTheme}
       renderItem={renderItem}
     >
-      <span className="block w-4">
-        <IconFont type={target.iconFont} />
-      </span>
+      <IconFont type={target.iconFont} />
     </Select>
   );
 };
