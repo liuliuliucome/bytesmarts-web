@@ -11,12 +11,13 @@ import { DocsLayoutProvider } from "./container";
 export type DocsLayoutProps = {
   doc: Docs;
   allDocs: Docs[];
-  breadcrumbs: Page.BreadcrumbType[];
+  breadcrumbs?: Page.BreadcrumbType[];
   tree: TreeNode[];
 };
 
 export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   const { children, ...reset } = props;
+  console.log(reset);
 
   return (
     <DocsLayoutProvider initialState={reset}>

@@ -53,9 +53,6 @@ export const DocsHeader: FC<{
               </Fragment>
             ))}
           </ul>
-          <h1 className="sr-only text-2xl font-semibold text-slate-800 dark:text-slate-200 md:text-3xl lg:not-sr-only lg:text-4xl">
-            {title}
-          </h1>
           <div className="lg:hidden">
             <button
               aria-label="Show docs navigation"

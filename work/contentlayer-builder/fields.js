@@ -1,5 +1,6 @@
 import i18nConfig from "../config/i18n.config";
 import { getLastEditedDate } from "./utils";
+import { slug } from "github-slugger";
 
 const { localUrlReg, defaultLocale } = i18nConfig;
 
@@ -13,7 +14,7 @@ const getMatchLocale = (path) => {
  * @param {import('contentlayer/source-files').LocalDocument} doc
  * @param {number} start
  */
-const getPaths = (doc, start = 0) => {
+const getFilePathsSlugs = (doc, start = 0) => {
   const paths = doc._raw.flattenedPath
     .replace(localUrlReg, "")
     .split("/")
@@ -22,7 +23,7 @@ const getPaths = (doc, start = 0) => {
   if (paths[paths.length - 1] === "index") {
     paths.pop();
   }
-  return paths;
+  return paths.map((item) => slug(item));
 };
 
 /**
@@ -82,19 +83,19 @@ export const computedFields = {
   },
   reativeRoute: {
     type: "string",
-    resolve: (doc) => getPaths(doc, 1).join("/"),
+    resolve: (doc) => getFilePathsSlugs(doc, 1).join("/"),
   },
   parentRoute: {
     type: "string",
     resolve: (doc) => {
-      const paths = getPaths(doc);
+      const paths = getFilePathsSlugs(doc);
       paths.pop();
       return paths.join("/");
     },
   },
   route: {
     type: "string",
-    resolve: (doc) => getPaths(doc).join("/"),
+    resolve: (doc) => getFilePathsSlugs(doc).join("/"),
   },
 
   /**
@@ -102,7 +103,7 @@ export const computedFields = {
    */
   // href: {
   //   type: "string",
-  //   resolve: (doc) => "/" + getPaths(doc).slice(1).join("/"),
+  //   resolve: (doc) => "/" + getFilePathsSlugs(doc).slice(1).join("/"),
   // },
   /**
    * HTMLLinkElement href attr(absoulte)
@@ -113,7 +114,10 @@ export const computedFields = {
       const matchLocale = getMatchLocale(doc._raw.flattenedPath);
       const paths = [
         // docs 目录下的去掉 content 根目录，其他的保留
-        ...getPaths(doc, doc._raw.sourceFileDir.startsWith("docs") ? 1 : 0),
+        ...getFilePathsSlugs(
+          doc,
+          doc._raw.sourceFileDir.startsWith("docs") ? 1 : 0,
+        ),
       ];
 
       // filter default local

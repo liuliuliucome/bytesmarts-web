@@ -44,7 +44,7 @@ export default async function DocsPage(props: Page.DocsSlugPageProps) {
 
   return (
     <DocsLayout
-      breadcrumbs={breadcrumbs}
+      // breadcrumbs={breadcrumbs}
       allDocs={allDocs}
       doc={doc}
       tree={docTree}
