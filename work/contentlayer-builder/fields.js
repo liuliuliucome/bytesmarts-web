@@ -99,37 +99,6 @@ export const computedFields = {
     resolve: (doc) => getFilePathsSlugs(doc).join("/"),
   },
 
-  /**
-   * HTMLLinkElement href attr
-   */
-  // href: {
-  //   type: "string",
-  //   resolve: (doc) => "/" + getFilePathsSlugs(doc).slice(1).join("/"),
-  // },
-  /**
-   * HTMLLinkElement href attr(absoulte)
-   */
-  fullHref: {
-    type: "string",
-    resolve: (doc) => {
-      const matchLocale = getMatchLocale(doc._raw.flattenedPath);
-      const paths = [
-        // docs 目录下的去掉 content 根目录，其他的保留
-        ...getFilePathsSlugs(
-          doc,
-          doc._raw.sourceFileDir.startsWith("docs") ? 1 : 0,
-        ),
-      ];
-
-      // filter default local
-      if (matchLocale != defaultLocale) {
-        paths.unshift(matchLocale);
-      }
-
-      return "/" + paths.join("/");
-    },
-  },
-
   fileMetaData: {
     type: "json",
     resolve: (doc) => FileParser.getFileMetaData(doc),

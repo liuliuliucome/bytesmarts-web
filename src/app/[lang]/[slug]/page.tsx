@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
-import { getDocsPageProps } from "@/utils/docs";
 import { DocsBuilder } from "@/utils/contentlayer/docs";
 
 // export const dynamicParams = false;

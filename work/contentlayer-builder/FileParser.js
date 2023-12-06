@@ -65,7 +65,7 @@ class FileParser {
     const pathsSlugs = FileParser.filePath2Slugs(flattenedPath);
 
     const href = "/" + pathsSlugs.join("/");
-    const fullHref = `/${locale}${href}`;
+    const fullHref = locale !== defaultLocale ? `/${locale}${href}` : href;
 
     return {
       order,

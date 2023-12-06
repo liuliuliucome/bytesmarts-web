@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { allPages } from "contentlayer/generated";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
-import { getDocsPageProps } from "@/utils/docs";
 import i18nConfig from "config/i18n.config";
 import { DocsBuilder } from "@/utils/contentlayer/docs";
 
