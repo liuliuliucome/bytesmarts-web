@@ -70,19 +70,10 @@ export const commonFields = {
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
   last_edited: { type: "date", resolve: getLastEditedDate },
-  slug: {
-    type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
-  },
 
   locale: {
     type: "string",
     resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
-  },
-
-  route: {
-    type: "string",
-    resolve: (doc) => getFilePathsSlugs(doc).join("/"),
   },
 
   fileMetaData: {

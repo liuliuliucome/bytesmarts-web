@@ -9,6 +9,6 @@ export const { Provider: DocsLayoutProvider, useContainer: useDocsLayout } =
   createContainer((props?: DocsLayoutProviderProps) => {
     return {
       ...(props as DocsLayoutProviderProps),
-      activePath: props?.doc.route,
+      activePath: props?.doc.fileMetaData.slug,
     };
   });
