@@ -46,13 +46,30 @@ const NavLink: FC<{
             }`,
       )}
     >
-      <Link href={url} className="flex h-full grow items-start space-x-2">
-        {level > 0 && sidebarIconFont && (
-          <IconFont className="mt-1" type={sidebarIconFont} />
-        )}
-        <span>{title}</span>
-        {label && <Label text={label} />}
-      </Link>
+      {node.level >= 2 ? (
+        <Link
+          href={url}
+          data-level={level}
+          className="flex h-full grow items-start space-x-2"
+        >
+          {level > 0 && sidebarIconFont && (
+            <IconFont className="mt-1" type={sidebarIconFont} />
+          )}
+          <span>{title}</span>
+          {label && <Label text={label} />}
+        </Link>
+      ) : (
+        <span
+          data-level={level}
+          className="flex h-full grow items-start space-x-2"
+        >
+          {level > 0 && sidebarIconFont && (
+            <IconFont className="mt-1" type={sidebarIconFont} />
+          )}
+          <span>{title}</span>
+          {label && <Label text={label} />}
+        </span>
+      )}
       {collapsible && (
         <button
           aria-label="Toggle children"
