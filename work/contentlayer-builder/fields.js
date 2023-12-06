@@ -1,6 +1,7 @@
 import i18nConfig from "../config/i18n.config";
 import { getLastEditedDate } from "./utils";
 import { slug } from "github-slugger";
+import { FileParser } from "./FileParser";
 
 const { localUrlReg, defaultLocale } = i18nConfig;
 
@@ -127,5 +128,10 @@ export const computedFields = {
 
       return "/" + paths.join("/");
     },
+  },
+
+  fileMetaData: {
+    type: "json",
+    resolve: FileParser.getFileMetaData,
   },
 };

@@ -3,6 +3,7 @@ import { allPages } from "contentlayer/generated";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { getDocsPageProps } from "@/utils/docs";
 import i18nConfig from "config/i18n.config";
+import { DocsBuilder } from "@/utils/contentlayer/docs";
 
 export async function generateMetadata(params: Page.DocsProps) {
   const page = allPages.find(
@@ -26,10 +27,10 @@ export async function generateStaticParams() {
 }
 
 export default async function Docs(props: Page.DocsProps) {
-  const { allDocs, doc, breadcrumbs, docTree } = getDocsPageProps({
+  const { docs, group, doc } = DocsBuilder.getPageProps({
     params: {
       ...props.params,
-      slug: [""],
+      slug: "docs",
     },
   });
 
@@ -38,11 +39,10 @@ export default async function Docs(props: Page.DocsProps) {
   }
 
   return (
-    <DocsLayout
-      breadcrumbs={breadcrumbs}
-      allDocs={allDocs}
-      doc={doc}
-      tree={docTree}
-    />
+    // <div>
+    //   <pre>{JSON.stringify(group, null, 2)}</pre>
+    //   <pre>{JSON.stringify(docs, null, 2)}</pre>
+    // </div>
+    <DocsLayout breadcrumbs={[]} allDocs={docs} doc={doc} tree={group} />
   );
 }

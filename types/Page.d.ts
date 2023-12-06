@@ -6,7 +6,7 @@ declare namespace Page {
   };
   interface DocsSlugPageProps {
     params: {
-      slug: string[];
+      slug: string;
       lang?: LocalType;
     };
   }
