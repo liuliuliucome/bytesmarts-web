@@ -1,31 +1,4 @@
-import i18nConfig from "../config/i18n.config";
-import { getLastEditedDate } from "./utils";
-import { slug } from "github-slugger";
 import { FileParser } from "./FileParser";
-
-const { localUrlReg, defaultLocale } = i18nConfig;
-
-const getMatchLocale = (path) => {
-  const matched = path.match(localUrlReg);
-  return matched ? matched[1] || defaultLocale : defaultLocale;
-};
-
-/**
- *
- * @param {import('contentlayer/source-files').LocalDocument} doc
- * @param {number} start
- */
-const getFilePathsSlugs = (doc, start = 0) => {
-  const paths = doc._raw.flattenedPath
-    .replace(localUrlReg, "")
-    .split("/")
-    .slice(start);
-
-  if (paths[paths.length - 1] === "index") {
-    paths.pop();
-  }
-  return paths.map((item) => slug(item));
-};
 
 /**
  * 通用字段
@@ -69,11 +42,11 @@ export const commonFields = {
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
-  last_edited: { type: "date", resolve: getLastEditedDate },
+  last_edited: { type: "date", resolve: FileParser.getLastEditedDate },
 
   locale: {
     type: "string",
-    resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
+    resolve: (doc) => FileParser.getFileLocale(doc._raw.flattenedPath),
   },
 
   fileMetaData: {

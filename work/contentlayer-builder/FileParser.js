@@ -1,9 +1,27 @@
 import { slug } from "github-slugger";
 import i18nConfig from "../config/i18n.config";
+import * as fs from "node:fs/promises";
+import path from "node:path";
+
 const { localUrlReg, defaultLocale } = i18nConfig;
 
 const orderReg = /^(\d+)?-/;
 class FileParser {
+  /**
+   *
+   * @param {import('contentlayer/core').DocumentGen} doc
+   * @returns {Promise<Date>}
+   */
+  static getLastEditedDate = async (doc) => {
+    if (doc.date) {
+      return new Date(doc.date);
+    }
+
+    const stats = await fs.stat(
+      path.join(contentDirPath, doc._raw.sourceFilePath),
+    );
+    return stats.mtime;
+  };
   /**
    *
    * @param {string} flattenedPath
