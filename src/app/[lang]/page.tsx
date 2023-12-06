@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { allPages } from "contentlayer/generated";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import i18nConfig from "config/i18n.config";
-import { DocsBuilder } from "@/utils/contentlayer/docs";
+import { DocsBuilder } from "@/utils/contentlayer/DocsBuilder";
 
 export async function generateMetadata(props: Page.DocsProps) {
   const { doc: page } = DocsBuilder.getPageProps({

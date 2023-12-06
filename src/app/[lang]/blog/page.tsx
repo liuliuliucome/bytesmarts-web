@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { BlogsIndexLayout } from "@/components/layouts/BlogsLayout/BlogsIndexLayout";
-import { BlogsBuilder } from "@/utils/contentlayer/blogs";
+import { BlogsBuilder } from "@/utils/contentlayer/BlogsBuilder";
 
 // export const dynamicParams = false;
 

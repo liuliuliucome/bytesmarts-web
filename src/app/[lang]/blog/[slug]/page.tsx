@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { BlogsLayout } from "@/components/layouts/BlogsLayout";
-import { BlogsBuilder } from "@/utils/contentlayer/blogs";
+import { BlogsBuilder } from "@/utils/contentlayer/BlogsBuilder";
 
 // export const dynamicParams = false;
 

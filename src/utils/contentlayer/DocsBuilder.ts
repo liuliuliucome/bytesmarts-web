@@ -1,6 +1,6 @@
 import { Docs, allDocs } from "contentlayer/generated";
 import { LocalesUtil } from "../LocalesUtil";
-import { find, forOwn, groupBy, omit, result } from "lodash";
+import { find, forOwn, groupBy, omit } from "lodash";
 import { TreeNode } from "types/TreeNode";
 
 export class DocsBuilder {
@@ -17,7 +17,10 @@ export class DocsBuilder {
       excerpt: doc.excerpt ?? null,
       // 带上 locale
       // docs 特殊，只需要对应 slug 部分
-      urlPath: "/" + doc.fileMetaData.locale + "/" + fullHrefs.pop(),
+      urlPath: LocalesUtil.replaceLocale(
+        fullHrefs.pop(),
+        doc.fileMetaData.locale,
+      ),
       children: children,
       // Transferring Document Data
       metaData: omit(doc, ["children", "_raw", "body"]) as any,

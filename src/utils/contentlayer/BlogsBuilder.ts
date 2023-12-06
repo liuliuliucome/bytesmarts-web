@@ -1,7 +1,7 @@
-import { Blogs, Docs, allBlogs } from "contentlayer/generated";
+import { Blogs, allBlogs } from "contentlayer/generated";
 import { LocalesUtil } from "../LocalesUtil";
 import { TreeNode } from "types/TreeNode";
-import { groupBy, omit } from "lodash";
+import { omit } from "lodash";
 
 export class BlogsBuilder {
   static getDocsWithLang(lang: I18n.Locale) {
@@ -9,7 +9,6 @@ export class BlogsBuilder {
   }
 
   static docToTree(doc: Blogs, children: TreeNode[] = [], level = 1): TreeNode {
-    const fullHrefs = doc.fileMetaData.fullHref.split("/");
     return {
       nav_title: doc.nav_title ?? null,
       title: doc.title,
@@ -17,7 +16,7 @@ export class BlogsBuilder {
       excerpt: doc.excerpt ?? null,
       // 带上 locale
       // docs 特殊，只需要对应 slug 部分
-      urlPath: "/" + doc.fileMetaData.locale + "/" + fullHrefs.pop(),
+      urlPath: doc.fileMetaData.fullHref,
       children: children,
       // Transferring Document Data
       metaData: omit(doc, ["children", "_raw", "body"]) as any,
