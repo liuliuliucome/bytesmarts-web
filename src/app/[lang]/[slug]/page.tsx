@@ -2,13 +2,14 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { getDocsPageProps } from "@/utils/docs";
+import { DocsBuilder } from "@/utils/contentlayer/docs";
 
 // export const dynamicParams = false;
 
 export async function generateMetadata(
   props: Page.DocsSlugPageProps,
 ): Promise<Metadata> {
-  const { doc } = getDocsPageProps(props);
+  const { doc } = DocsBuilder.getPageProps(props);
 
   if (!doc) {
     return {};
@@ -21,22 +22,17 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams(props: Page.DocsSlugPageProps) {
-  const { allDocs } = getDocsPageProps({
-    params: {
-      ...props.params,
-      slug: [""],
-    },
-  });
+  const { docs } = DocsBuilder.getPageProps(props);
 
-  return allDocs.map((docs) => {
+  return docs.map((doc) => {
     return {
-      slug: docs.reativeRoute.split("/"),
+      slug: doc.fileMetaData.slug,
     };
   });
 }
 
 export default async function DocsPage(props: Page.DocsSlugPageProps) {
-  const { allDocs, doc, breadcrumbs, docTree } = getDocsPageProps(props);
+  const { docs, doc, group } = DocsBuilder.getPageProps(props);
 
   if (!doc) {
     notFound();
@@ -45,9 +41,9 @@ export default async function DocsPage(props: Page.DocsSlugPageProps) {
   return (
     <DocsLayout
       // breadcrumbs={breadcrumbs}
-      allDocs={allDocs}
+      allDocs={docs}
       doc={doc}
-      tree={docTree}
+      tree={group}
     />
   );
 }

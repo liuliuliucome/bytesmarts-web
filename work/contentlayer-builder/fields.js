@@ -132,6 +132,6 @@ export const computedFields = {
 
   fileMetaData: {
     type: "json",
-    resolve: FileParser.getFileMetaData,
+    resolve: (doc) => FileParser.getFileMetaData(doc),
   },
 };

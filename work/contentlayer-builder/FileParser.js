@@ -38,16 +38,41 @@ class FileParser {
    *
    * @param {string} flattenedPath
    */
+  static getHref(flattenedPath) {
+    return "/" + FileParser.filePath2Slugs(flattenedPath).join("/");
+  }
+
+  /**
+   *
+   * @param {string} flattenedPath
+   */
+  static filePath2Slugs(flattenedPath) {
+    return flattenedPath.split("/").map((path) => {
+      const [, slug] = FileParser.getFileSlug(path);
+      return slug;
+    });
+  }
+
+  /**
+   *
+   * @param {string} flattenedPath
+   */
   static getMetaData(flattenedPath) {
     const order = FileParser.getFileOrder(flattenedPath);
     const locale = FileParser.getFileLocale(flattenedPath);
     const name = flattenedPath.split("/").pop();
     const [replaceName, slug] = FileParser.getFileSlug(name);
+    const pathsSlugs = FileParser.filePath2Slugs(flattenedPath);
+
+    const href = "/" + pathsSlugs.join("/");
+    const fullHref = `/${locale}${href}`;
 
     return {
       order,
       locale,
       slug,
+      pathsSlugs,
+      fullHref,
       name,
       replaceName,
     };

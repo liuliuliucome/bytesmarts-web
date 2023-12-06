@@ -9,13 +9,15 @@ export class DocsBuilder {
   }
 
   static docToTree(doc: Docs, children: TreeNode[] = [], level = 1): TreeNode {
+    const fullHrefs = doc.fileMetaData.fullHref.split("/");
     return {
       nav_title: doc.nav_title ?? null,
       title: doc.title,
       label: doc.label ?? null,
       excerpt: doc.excerpt ?? null,
       // 带上 locale
-      urlPath: doc.fullHref,
+      // docs 特殊，只需要对应 slug 部分
+      urlPath: "/" + doc.fileMetaData.locale + "/" + fullHrefs.pop(),
       children: children,
       // Transferring Document Data
       metaData: omit(doc, ["children", "_raw", "body"]) as any,
@@ -57,8 +59,9 @@ export class DocsBuilder {
     const group = DocsBuilder.groupDocsByParentSlug(docs);
     const doc = docs.find(
       (item) =>
-        item.fileMetaData.slug === "index" &&
-        item.fileMetaData.parent.slug === "docs",
+        (item.fileMetaData.slug === "index" &&
+          item.fileMetaData.parent.slug === "docs") ||
+        item.fileMetaData.slug === slug,
     );
 
     return {
