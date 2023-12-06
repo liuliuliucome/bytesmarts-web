@@ -17,6 +17,7 @@ export type BlogsLayoutProps = {
 
 export function BlogsIndexLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
+  console.log("reset", reset);
 
   return (
     <BlogsLayoutProvider initialState={reset}>

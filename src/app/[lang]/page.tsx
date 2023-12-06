@@ -4,10 +4,13 @@ import { DocsLayout } from "@/components/layouts/DocsLayout";
 import i18nConfig from "config/i18n.config";
 import { DocsBuilder } from "@/utils/contentlayer/docs";
 
-export async function generateMetadata(params: Page.DocsProps) {
-  const page = allPages.find(
-    (item) => item.slug.includes("docs") && item.locale === params.params.lang,
-  );
+export async function generateMetadata(props: Page.DocsProps) {
+  const { doc: page } = DocsBuilder.getPageProps({
+    params: {
+      ...props.params,
+      slug: "docs",
+    },
+  });
 
   if (!page) {
     return {};

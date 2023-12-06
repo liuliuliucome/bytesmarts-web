@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { BlogsLayout } from "@/components/layouts/BlogsLayout";
-import { getBlogsPageProps } from "@/utils/docs";
+import { BlogsBuilder } from "@/utils/contentlayer/blogs";
 
 // export const dynamicParams = false;
 
 export async function generateMetadata(
   props: Page.BlogsSlugPageProps,
 ): Promise<Metadata> {
-  const { doc } = getBlogsPageProps(props);
+  const { doc } = BlogsBuilder.getPageProps(props);
 
   if (!doc) {
     return {};
@@ -20,32 +20,23 @@ export async function generateMetadata(
   };
 }
 
-// export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
-//   console.log("props", props);
+export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
+  const { docs } = BlogsBuilder.getPageProps(props);
 
-//   const { allDocs } = getBlogsPageProps(props);
-
-//   return allDocs.map((docs) => {
-//     return {
-//       lang: props.params.lang,
-//       slug: docs.reativeRoute.split("/"),
-//     };
-//   });
-// }
+  return docs.map((doc) => {
+    return {
+      lang: props.params.lang,
+      slug: doc.fileMetaData.slug,
+    };
+  });
+}
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
-  const { allDocs, doc, breadcrumbs, docTree } = getBlogsPageProps(props);
+  const { docs, doc, tree } = BlogsBuilder.getPageProps(props);
 
   if (!doc) {
     notFound();
   }
 
-  return (
-    <BlogsLayout
-      breadcrumbs={breadcrumbs}
-      allDocs={allDocs}
-      doc={doc}
-      tree={docTree}
-    />
-  );
+  return <BlogsLayout breadcrumbs={[]} allDocs={docs} doc={doc} tree={tree} />;
 }

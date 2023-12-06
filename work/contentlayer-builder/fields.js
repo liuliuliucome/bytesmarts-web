@@ -74,26 +74,12 @@ export const computedFields = {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
   },
-  // slugAsParams: {
-  //   type: "string",
-  //   resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  // },
+
   locale: {
     type: "string",
     resolve: (doc) => getMatchLocale(doc._raw.flattenedPath),
   },
-  reativeRoute: {
-    type: "string",
-    resolve: (doc) => getFilePathsSlugs(doc, 1).join("/"),
-  },
-  parentRoute: {
-    type: "string",
-    resolve: (doc) => {
-      const paths = getFilePathsSlugs(doc);
-      paths.pop();
-      return paths.join("/");
-    },
-  },
+
   route: {
     type: "string",
     resolve: (doc) => getFilePathsSlugs(doc).join("/"),

@@ -1,13 +1,13 @@
 import { Metadata } from "next";
-import { getBlogsPageProps } from "@/utils/docs";
 import { BlogsIndexLayout } from "@/components/layouts/BlogsLayout/BlogsIndexLayout";
+import { BlogsBuilder } from "@/utils/contentlayer/blogs";
 
 // export const dynamicParams = false;
 
 export async function generateMetadata(
   props: Page.BlogsSlugPageProps,
 ): Promise<Metadata> {
-  const { doc } = getBlogsPageProps(props);
+  const { doc } = BlogsBuilder.getPageProps(props);
 
   if (!doc) {
     return {};
@@ -20,14 +20,14 @@ export async function generateMetadata(
 }
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
-  const { allDocs, doc, breadcrumbs, docTree } = getBlogsPageProps(props);
+  const { docs, doc, tree } = BlogsBuilder.getPageProps(props);
 
   return (
     <BlogsIndexLayout
-      breadcrumbs={breadcrumbs}
-      allDocs={allDocs}
-      doc={allDocs[0]}
-      tree={docTree}
+      breadcrumbs={[]}
+      allDocs={docs}
+      doc={doc as any}
+      tree={tree}
     />
   );
 }
