@@ -1,5 +1,5 @@
 import { FileParser } from "./FileParser";
-
+import { getLastEditedDate } from "./utils";
 /**
  * 通用字段
  * @see {MDX.CommonFileds}
@@ -42,7 +42,7 @@ export const commonFields = {
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 export const computedFields = {
-  last_edited: { type: "date", resolve: FileParser.getLastEditedDate },
+  last_edited: { type: "date", resolve: getLastEditedDate },
 
   locale: {
     type: "string",
