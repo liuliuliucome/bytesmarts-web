@@ -21,6 +21,7 @@ export async function generateMetadata(
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   const { docs, doc, tree } = BlogsBuilder.getPageProps(props);
+  const { categoryies, tags } = BlogsBuilder.getBlogIndexProps(props);
 
   return (
     <BlogsIndexLayout
@@ -28,6 +29,8 @@ export default async function BlogPage(props: Page.BlogsSlugPageProps) {
       allDocs={docs}
       doc={doc as any}
       tree={tree}
+      categoryies={categoryies}
+      tags={tags}
     />
   );
 }

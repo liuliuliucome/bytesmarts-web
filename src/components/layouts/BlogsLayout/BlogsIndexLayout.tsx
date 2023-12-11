@@ -13,6 +13,8 @@ export type BlogsLayoutProps = {
   allDocs: Blogs[];
   breadcrumbs: Page.BreadcrumbType[];
   tree: TreeNode[];
+  categoryies: any;
+  tags: any;
 };
 
 export function BlogsIndexLayout(props: PropsWithChildren<BlogsLayoutProps>) {

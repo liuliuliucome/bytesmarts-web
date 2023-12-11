@@ -59,9 +59,21 @@ export const Blogs = defineDocumentType(() => ({
     authorLogo: {
       type: "string",
     },
+    categories: {
+      type: "list",
+      of: { type: "string" },
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+    },
   },
   computedFields: {
     ...computedFields,
+    archive: {
+      type: "string",
+      resolve: (doc) => doc._raw.sourceFileDir.split("/").slice(1, 1),
+    },
     headings: {
       type: "json",
       resolve: async (doc) => {

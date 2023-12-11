@@ -2,13 +2,18 @@ import { Blogs, allBlogs } from "contentlayer/generated";
 import { LocalesUtil } from "../LocalesUtil";
 import { TreeNode } from "types/TreeNode";
 import { omit } from "lodash";
+import { BaseBuilder } from "./BaseBuilder";
 
 export class BlogsBuilder {
   static getDocsWithLang(lang: I18n.Locale) {
     return allBlogs.filter((item) => item.locale === lang);
   }
 
-  static docToTree(doc: Blogs, children: TreeNode[] = [], level = 1): TreeNode {
+  static docToTree<T extends Blogs>(
+    doc: T,
+    children: TreeNode[] = [],
+    level = 1,
+  ): TreeNode {
     return {
       nav_title: doc.nav_title ?? null,
       title: doc.title,
@@ -24,7 +29,11 @@ export class BlogsBuilder {
     };
   }
 
-  static buildTree(docs: Blogs[], parentPath = "", level = 1): TreeNode[] {
+  static buildTree<T extends Blogs>(
+    docs: T[],
+    parentPath = "",
+    level = 1,
+  ): TreeNode[] {
     return docs
       .filter((item) => item.fileMetaData.parent.fullHref === parentPath)
       .map((doc) => {
@@ -65,6 +74,20 @@ export class BlogsBuilder {
       docs,
       tree,
       doc: doc || docs[0],
+    };
+  }
+
+  static getBlogIndexProps(props: Page.BlogsSlugPageProps) {
+    let { lang } = props.params;
+    lang = LocalesUtil.toLocale(lang);
+    const docs = BlogsBuilder.getDocsWithLang(lang);
+
+    const categoryies = BaseBuilder.groupByField(docs, "categories");
+    const tags = BaseBuilder.groupByField(docs, "tags");
+
+    return {
+      categoryies,
+      tags,
     };
   }
 }
