@@ -21,19 +21,35 @@ export async function generateMetadata(
   };
 }
 
+export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
+  const builder = new BlogsBuilder({ lang: props.params.lang });
+
+  const { tags } = builder.getBlogIndexProps();
+
+  return tags.map((doc) => {
+    return {
+      lang: props.params.lang,
+      slug: doc.slug,
+    };
+  });
+}
+
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   const slug = props.params.slug || "";
   const builder = new BlogsBuilder({ lang: props.params.lang });
-  const { docs, doc, tree } = builder.getPageProps(slug);
+
   const { categoryies, tags } = builder.getBlogIndexProps();
+
+  const allDocs =
+    tags.find((item) => item.slug === props.params.slug)?.children || [];
 
   return (
     <BlogsIndexLayout
-      type="categories"
+      type="tags"
       breadcrumbs={[]}
-      allDocs={docs}
-      doc={doc as any}
-      tree={tree}
+      allDocs={allDocs}
+      doc={allDocs[0]}
+      tree={[]}
       categoryies={categoryies}
       tags={tags}
       slug={slug}

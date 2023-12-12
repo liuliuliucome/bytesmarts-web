@@ -1,21 +1,10 @@
 "use client";
-import { Blogs } from "contentlayer/generated";
 import { PropsWithChildren } from "react";
 import { Footer } from "@/components/common/Footer";
-import { TreeNode } from "types/TreeNode";
 import { BlogsLayoutProvider } from "./container";
-import { BlogMain } from "./components";
 import { MainNavigation } from "@/components/common/MainNavigation";
 import { BlogsIndexContent } from "./components/BlogIndexContent";
-
-export type BlogsLayoutProps = {
-  doc: Blogs;
-  allDocs: Blogs[];
-  breadcrumbs: Page.BreadcrumbType[];
-  tree: TreeNode[];
-  categoryies: ContentlayerBuilder.GroupType<Blogs>[];
-  tags: ContentlayerBuilder.GroupType<Blogs>[];
-};
+import { BlogsLayoutProps } from ".";
 
 export function BlogsIndexLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
