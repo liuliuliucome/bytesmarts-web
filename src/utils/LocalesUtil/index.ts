@@ -31,6 +31,10 @@ export class LocalesUtil {
       return pathanme;
     }
 
+    if (LocalesUtil.isDefaultLocale(locale)) {
+      return toPath(pathanme);
+    }
+
     return toPath([locale, pathanme]);
   }
 
