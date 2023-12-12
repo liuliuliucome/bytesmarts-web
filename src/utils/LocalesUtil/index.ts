@@ -1,16 +1,20 @@
 import i18nConfig from "config/i18n.config";
-import { isString } from "lodash";
+import { isArray, isString } from "lodash";
 
 const { locales, defaultLocale, localUrlReg } = i18nConfig;
 
+function toPath(pathnames: string | string[]): string {
+  const pathanme = isArray(pathnames) ? pathnames.join("/") : pathnames;
+  return pathanme[0] === "/" ? pathanme : "/" + pathanme;
+}
 export class LocalesUtil {
   static replaceLocale(pathname: string, value: I18n.Locale) {
     const paths = pathname.split("/");
     if (LocalesUtil.isLocalStartPathname(pathname)) {
       if (LocalesUtil.isDefaultLocale(value)) {
-        return "/" + paths.slice(2).join("/");
+        return toPath(paths.slice(2));
       }
-      return ["/".concat(value), ...paths.slice(2)].join("/");
+      return toPath([value, ...paths.slice(2)]);
     }
 
     if (!LocalesUtil.isDefaultLocale(value)) {
@@ -18,6 +22,18 @@ export class LocalesUtil {
     }
     return pathname;
   }
+
+  static toHref(pathnames: string | string[], locale?: I18n.Locale): string {
+    locale = LocalesUtil.toLocale(locale);
+    const pathanme = isArray(pathnames) ? pathnames.join("/") : pathnames;
+
+    if (LocalesUtil.isLocalStartPathname(pathanme)) {
+      return pathanme;
+    }
+
+    return toPath([locale, pathanme]);
+  }
+
   static toLocale(lang: string | undefined): I18n.Locale {
     const value = isString(lang) ? lang.toLocaleLowerCase() : "";
     return value && LocalesUtil.isLocale(value) ? value : defaultLocale;

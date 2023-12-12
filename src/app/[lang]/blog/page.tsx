@@ -7,7 +7,9 @@ import { BlogsBuilder } from "@/utils/contentlayer/BlogsBuilder";
 export async function generateMetadata(
   props: Page.BlogsSlugPageProps,
 ): Promise<Metadata> {
-  const { doc } = BlogsBuilder.getPageProps(props);
+  const builder = new BlogsBuilder({ lang: props.params.lang });
+
+  const { doc } = builder.getPageProps(props.params.slug || "");
 
   if (!doc) {
     return {};
@@ -20,8 +22,10 @@ export async function generateMetadata(
 }
 
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
-  const { docs, doc, tree } = BlogsBuilder.getPageProps(props);
-  const { categoryies, tags } = BlogsBuilder.getBlogIndexProps(props);
+  const builder = new BlogsBuilder({ lang: props.params.lang });
+
+  const { docs, doc, tree } = builder.getPageProps(props.params.slug || "");
+  const { categoryies, tags } = builder.getBlogIndexProps();
 
   return (
     <BlogsIndexLayout

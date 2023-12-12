@@ -2,14 +2,24 @@ import { Blogs, allBlogs } from "contentlayer/generated";
 import { LocalesUtil } from "../LocalesUtil";
 import { TreeNode } from "types/TreeNode";
 import { omit } from "lodash";
-import { BaseBuilder } from "./BaseBuilder";
+import { BaseBuilder, BaseBuilderConfig } from "./BaseBuilder";
 
-export class BlogsBuilder {
-  static getDocsWithLang(lang: I18n.Locale) {
-    return allBlogs.filter((item) => item.locale === lang);
+export class BlogsBuilder extends BaseBuilder {
+  protected contentList: Blogs[];
+
+  constructor(config?: Partial<BaseBuilderConfig>) {
+    super(config);
+
+    this.contentList = allBlogs.filter(
+      (item) => item.locale === LocalesUtil.toLocale(config?.lang),
+    );
   }
 
-  static docToTree<T extends Blogs>(
+  getContentList() {
+    return this.contentList;
+  }
+
+  docToTree<T extends Blogs>(
     doc: T,
     children: TreeNode[] = [],
     level = 1,
@@ -29,7 +39,7 @@ export class BlogsBuilder {
     };
   }
 
-  static buildTree<T extends Blogs>(
+  buildTree<T extends Blogs>(
     docs: T[],
     parentPath = "",
     level = 1,
@@ -44,11 +54,7 @@ export class BlogsBuilder {
           excerpt: doc.excerpt ?? null,
           // 带上 locale
           urlPath: doc.fileMetaData.fullHref,
-          children: BlogsBuilder.buildTree(
-            docs,
-            doc.fileMetaData.fullHref,
-            level + 1,
-          ),
+          children: this.buildTree(docs, doc.fileMetaData.fullHref, level + 1),
           // Transferring Document Data
           metaData: omit(doc, ["children", "_raw", "body"]),
           level: level,
@@ -56,13 +62,9 @@ export class BlogsBuilder {
       });
   }
 
-  static getPageProps(props: Page.BlogsSlugPageProps) {
-    let { slug, lang } = props.params;
-
-    lang = LocalesUtil.toLocale(lang);
-
-    const docs = BlogsBuilder.getDocsWithLang(lang);
-    const tree = BlogsBuilder.buildTree(docs, "/blog");
+  getPageProps(slug: string) {
+    const docs = this.contentList;
+    const tree = this.buildTree(docs, "/blog");
     const doc = docs.find(
       (item) =>
         (item.fileMetaData.slug === "index" &&
@@ -77,14 +79,9 @@ export class BlogsBuilder {
     };
   }
 
-  static getBlogIndexProps(props: Page.BlogsSlugPageProps) {
-    let { lang } = props.params;
-    lang = LocalesUtil.toLocale(lang);
-    const docs = BlogsBuilder.getDocsWithLang(lang);
-
-    const categoryies = BaseBuilder.groupByField(docs, "categories");
-    const tags = BaseBuilder.groupByField(docs, "tags");
-
+  getBlogIndexProps() {
+    const categoryies = this.groupByField(this.contentList, "categories");
+    const tags = this.groupByField(this.contentList, "tags");
     return {
       categoryies,
       tags,

@@ -9,6 +9,8 @@ declare namespace ContentlayerBuilder {
   type GroupType<T> = {
     key: string;
     groupBy: string;
+    locale: I18n.Locale;
+    slug: string;
     children?: T[];
     [key: string]: any;
   };

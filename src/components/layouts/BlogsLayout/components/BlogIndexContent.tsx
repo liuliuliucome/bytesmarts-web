@@ -1,6 +1,6 @@
 import mapChildren from "@/utils/mapChildren";
 import { useBlogsLayout } from "../container";
-import { DocsNavigation } from "./DocsNavigation";
+import { BlogNavigation } from "./BlogNavigation";
 import Image from "next/image";
 import { A } from "@/components/common";
 
@@ -18,7 +18,7 @@ export function BlogsIndexContent() {
         className="sticky top-16 hidden shrink-0 border-r border-gray-200 bg-secondary dark:border-gray-800 lg:block"
       >
         <div className="-ml-3 h-full overflow-y-scroll p-8 pl-16">
-          <DocsNavigation />
+          <BlogNavigation />
         </div>
         <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-t from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
         <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-white/0 to-white/100 dark:from-gray-950/0 dark:to-gray-950/100" />
@@ -47,7 +47,7 @@ export function BlogsIndexContent() {
                 </div>
               </header>
               <h2 className="py-4 text-2xl font-semibold lg:max-w-full">
-                <A href={item.fullHref}>{item.title}</A>
+                <A href={item.fileMetaData.fullHref}>{item.title}</A>
               </h2>
               <p className="text-base">{item.description}</p>
             </article>

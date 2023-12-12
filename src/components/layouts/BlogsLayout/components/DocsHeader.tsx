@@ -1,6 +1,5 @@
 import { FC, Fragment, useState, useEffect } from "react";
 import Link from "next/link";
-import { DocsNavigation } from "./DocsNavigation";
 
 import { usePathname } from "next/navigation";
 
@@ -8,6 +7,7 @@ import classNames from "classnames";
 import { useBlogsLayout } from "../container";
 import { Icon } from "@/components/common/Icon";
 import IconFont from "@/components/common/IconFont";
+import { BlogNavigation } from "./BlogNavigation";
 
 export const DocsHeader: FC<{
   title: string;
@@ -84,7 +84,7 @@ export const DocsHeader: FC<{
               </button>
             </div>
             <div className="pt-4">
-              <DocsNavigation />
+              <BlogNavigation />
             </div>
           </div>
         </div>

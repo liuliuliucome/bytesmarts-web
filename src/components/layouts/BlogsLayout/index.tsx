@@ -12,6 +12,9 @@ export type BlogsLayoutProps = {
   allDocs: Blogs[];
   breadcrumbs: Page.BreadcrumbType[];
   tree: TreeNode[];
+
+  categoryies: ContentlayerBuilder.GroupType<Blogs>[];
+  tags: ContentlayerBuilder.GroupType<Blogs>[];
 };
 
 export function BlogsLayout(props: PropsWithChildren<BlogsLayoutProps>) {
