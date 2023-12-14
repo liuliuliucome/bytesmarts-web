@@ -2,14 +2,24 @@ import { Docs, allDocs } from "contentlayer/generated";
 import { LocalesUtil } from "../LocalesUtil";
 import { find, forOwn, groupBy, omit } from "lodash";
 import { TreeNode } from "types/TreeNode";
+import { BaseBuilder, BaseBuilderConfig } from "./BaseBuilder";
 
-export class DocsBuilder {
-  static getDocsWithLang(lang: I18n.Locale) {
-    return allDocs.filter((item) => item.locale === lang);
+export class DocsBuilder extends BaseBuilder {
+  protected contentList: Docs[];
+
+  constructor(config?: Partial<BaseBuilderConfig>) {
+    super(config);
+
+    this.contentList = allDocs.filter(
+      (item) => item.locale === LocalesUtil.toLocale(config?.lang),
+    );
   }
 
-  static docToTree(doc: Docs, children: TreeNode[] = [], level = 1): TreeNode {
-    const fullHrefs = doc.fileMetaData.fullHref.split("/");
+  getContentList() {
+    return this.contentList;
+  }
+
+  docToTree(doc: Docs, children: TreeNode[] = [], level = 1): TreeNode {
     return {
       nav_title: doc.nav_title ?? null,
       title: doc.title,
@@ -17,8 +27,8 @@ export class DocsBuilder {
       excerpt: doc.excerpt ?? null,
       // 带上 locale
       // docs 特殊，只需要对应 slug 部分
-      urlPath: LocalesUtil.replaceLocale(
-        fullHrefs.pop(),
+      urlPath: LocalesUtil.toHref(
+        doc.fileMetaData.pathsSlugs.slice(-1),
         doc.fileMetaData.locale,
       ),
       children: children,
@@ -28,7 +38,7 @@ export class DocsBuilder {
     };
   }
 
-  static groupDocsByParentSlug(docs: Docs[]) {
+  groupDocsByParentSlug(docs: Docs[]) {
     const docsMaps = groupBy(docs, (doc) => doc.fileMetaData.parent.name);
     const results = [] as TreeNode[];
 
@@ -47,19 +57,16 @@ export class DocsBuilder {
         level: 1,
         children: value
           .sort((item) => item.fileMetaData.order)
-          .map((doc) => DocsBuilder.docToTree(doc, [], 2)),
+          .map((doc) => this.docToTree(doc, [], 2)),
       });
     });
     return results;
   }
 
-  static getPageProps(props: Page.DocsSlugPageProps) {
-    let { slug, lang } = props.params;
-
-    lang = LocalesUtil.toLocale(lang);
-
-    const docs = DocsBuilder.getDocsWithLang(lang);
-    const group = DocsBuilder.groupDocsByParentSlug(docs);
+  getPageProps(props: Page.DocsSlugPageProps) {
+    let { slug } = props.params;
+    const docs = this.contentList;
+    const group = this.groupDocsByParentSlug(docs);
     const doc = docs.find(
       (item) =>
         (item.fileMetaData.slug === "index" &&
