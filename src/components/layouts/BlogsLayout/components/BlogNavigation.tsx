@@ -67,7 +67,7 @@ export function BlogNavigation() {
   const { tags, categoryies } = useBlogsLayout();
   const router = usePathname();
   return (
-    <aside data-testid="BlogNavigation" className="-ml-6 w-80">
+    <aside data-testid="BlogNavigation" className="w-80">
       {/* <div>
         <Tree tree={tree} level={0} activePath={router} />
       </div> */}

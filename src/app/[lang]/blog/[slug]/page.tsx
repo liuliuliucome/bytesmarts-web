@@ -38,6 +38,7 @@ export async function generateStaticParams(props: Page.BlogsSlugPageProps) {
 export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   const builder = new BlogsBuilder({ lang: props.params.lang });
   const { docs, doc, tree } = builder.getPageProps(props.params.slug || "");
+  const { categoryies, tags } = builder.getBlogIndexProps();
 
   if (!doc) {
     notFound();
@@ -49,8 +50,8 @@ export default async function BlogPage(props: Page.BlogsSlugPageProps) {
       allDocs={docs}
       doc={doc}
       tree={tree}
-      categoryies={[]}
-      tags={[]}
+      categoryies={categoryies}
+      tags={tags}
     />
   );
 }

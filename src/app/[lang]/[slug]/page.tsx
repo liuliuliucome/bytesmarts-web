@@ -8,7 +8,8 @@ import { DocsBuilder } from "@/utils/contentlayer/DocsBuilder";
 export async function generateMetadata(
   props: Page.DocsSlugPageProps,
 ): Promise<Metadata> {
-  const { doc } = DocsBuilder.getPageProps(props);
+  const builder = new DocsBuilder({ lang: props.params.lang });
+  const { doc } = builder.getPageProps(props);
 
   if (!doc) {
     return {};
@@ -21,7 +22,8 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams(props: Page.DocsSlugPageProps) {
-  const { docs } = DocsBuilder.getPageProps(props);
+  const builder = new DocsBuilder({ lang: props.params.lang });
+  const { docs } = builder.getPageProps(props);
 
   return docs.map((doc) => {
     return {
@@ -31,7 +33,8 @@ export async function generateStaticParams(props: Page.DocsSlugPageProps) {
 }
 
 export default async function DocsPage(props: Page.DocsSlugPageProps) {
-  const { docs, doc, group } = DocsBuilder.getPageProps(props);
+  const builder = new DocsBuilder({ lang: props.params.lang });
+  const { docs, doc, group } = builder.getPageProps(props);
 
   if (!doc) {
     notFound();

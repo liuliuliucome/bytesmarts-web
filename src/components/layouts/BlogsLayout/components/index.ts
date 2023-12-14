@@ -1,5 +1,5 @@
 export * from "./DocsFooter";
-export * from "./DocsHeader";
+export * from "./BlogHeader";
 export * from "./BlogNavigation";
 export * from "./OptionsTable";
 export * from "./BlogMain";

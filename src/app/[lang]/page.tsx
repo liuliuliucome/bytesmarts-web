@@ -5,7 +5,8 @@ import i18nConfig from "config/i18n.config";
 import { DocsBuilder } from "@/utils/contentlayer/DocsBuilder";
 
 export async function generateMetadata(props: Page.DocsProps) {
-  const { doc: page } = DocsBuilder.getPageProps({
+  const builder = new DocsBuilder({ lang: props.params.lang });
+  const { doc: page } = builder.getPageProps({
     params: {
       ...props.params,
       slug: "docs",
@@ -29,7 +30,8 @@ export async function generateStaticParams() {
 }
 
 export default async function Docs(props: Page.DocsProps) {
-  const { docs, group, doc } = DocsBuilder.getPageProps({
+  const builder = new DocsBuilder({ lang: props.params.lang });
+  const { docs, group, doc } = builder.getPageProps({
     params: {
       ...props.params,
       slug: "docs",

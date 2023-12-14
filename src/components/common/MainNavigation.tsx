@@ -10,7 +10,7 @@ import IconFont from "./IconFont";
 import { LangSwitcher } from "./LangSwitcher";
 
 const navLinks: Array<{ label: string; url: string }> = [
-  { label: "Documentation", url: "/" },
+  // { label: "Documentation", url: "/" },
   //
   // Removing this temporarily, until it is more active.
   { label: "Blogs", url: "/blog" },

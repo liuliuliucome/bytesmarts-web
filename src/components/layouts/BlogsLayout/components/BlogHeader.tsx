@@ -9,10 +9,8 @@ import { Icon } from "@/components/common/Icon";
 import IconFont from "@/components/common/IconFont";
 import { BlogNavigation } from "./BlogNavigation";
 
-export const DocsHeader: FC<{
-  title: string;
-}> = ({ title }) => {
-  const { tree, breadcrumbs } = useBlogsLayout();
+export function BlogHeader() {
+  const { tree, doc, breadcrumbs } = useBlogsLayout();
   const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
   const [top, setTop] = useState<boolean>(true);
@@ -33,7 +31,7 @@ export const DocsHeader: FC<{
   return (
     <>
       <header data-testid="DocsHeader" className="relative w-full">
-        <div className="mx-auto w-full max-w-3xl space-y-2 px-4 py-8 md:px-8 lg:max-w-full lg:px-16">
+        <div className="mx-auto w-full max-w-3xl space-y-2  px-4 py-4 md:px-8 md:py-12 lg:max-w-full lg:px-16">
           <ul className="-mx-1 flex flex-wrap items-center text-sm">
             {breadcrumbs.map(({ path, title }, index) => (
               <Fragment key={index}>
@@ -53,16 +51,13 @@ export const DocsHeader: FC<{
               </Fragment>
             ))}
           </ul>
-          <div className="lg:hidden">
+          <div>
             <button
               aria-label="Show docs navigation"
               onClick={() => setOpen(true)}
               className="flex space-x-2 text-left text-2xl font-semibold text-slate-800 dark:text-slate-200 md:space-x-3 md:text-3xl lg:text-4xl"
             >
-              <span className="mt-1.5 inline-block w-4 flex-shrink-0 md:w-5">
-                <Icon name="chevron-down" />
-              </span>
-              <span className="inline-block flex-shrink">{title}</span>
+              <span className="inline-block flex-shrink">{doc.title}</span>
             </button>
           </div>
         </div>
@@ -114,10 +109,10 @@ export const DocsHeader: FC<{
             </Fragment>
           ))}
           <li className="hidden text-slate-800 dark:text-slate-200 lg:block">
-            {title}
+            {doc.title}
           </li>
         </ul>
       </div>
     </>
   );
-};
+}
