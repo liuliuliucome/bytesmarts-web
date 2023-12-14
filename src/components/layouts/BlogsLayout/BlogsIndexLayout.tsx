@@ -5,10 +5,11 @@ import { BlogsLayoutProvider } from "./container";
 import { MainNavigation } from "@/components/common/MainNavigation";
 import { BlogsIndexContent } from "./components/BlogIndexContent";
 import { BlogsLayoutProps } from ".";
+import { logger } from "@/utils/pulgins";
 
 export function BlogsIndexLayout(props: PropsWithChildren<BlogsLayoutProps>) {
   const { children, ...reset } = props;
-  console.log("reset", reset);
+  logger("reset", reset);
 
   return (
     <BlogsLayoutProvider initialState={reset}>

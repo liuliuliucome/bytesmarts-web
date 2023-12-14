@@ -5,10 +5,11 @@ import Image from "next/image";
 import { A } from "@/components/common";
 
 import defaultAuthorLogo from "@/assets/images/default-author-logo.png";
+import { logger } from "@/utils/pulgins";
 
 export function BlogsIndexContent() {
   const { allDocs } = useBlogsLayout();
-  console.log("defaultAuthorLogo", defaultAuthorLogo);
+  logger("defaultAuthorLogo", defaultAuthorLogo);
 
   return (
     <div className="relative mr-auto w-full max-w-screen-2xl lg:flex lg:items-start">

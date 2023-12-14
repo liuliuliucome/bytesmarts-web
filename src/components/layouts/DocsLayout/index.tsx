@@ -7,6 +7,7 @@ import { Footer } from "@/components/common/Footer";
 import { DocsMain } from "./components";
 import { TreeNode } from "types/TreeNode";
 import { DocsLayoutProvider } from "./container";
+import { logger } from "@/utils/pulgins";
 
 export type DocsLayoutProps = {
   doc: Docs;
@@ -17,7 +18,7 @@ export type DocsLayoutProps = {
 
 export function DocsLayout(props: PropsWithChildren<DocsLayoutProps>) {
   const { children, ...reset } = props;
-  console.log(reset);
+  logger(reset);
 
   return (
     <DocsLayoutProvider initialState={reset}>

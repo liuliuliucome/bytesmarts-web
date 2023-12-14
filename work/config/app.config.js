@@ -1,5 +1,10 @@
 const appConfig = {
   /**
+   * @type {'prod'|'qa'|'local'}
+   */
+  env: process.env.NEXT_PUBLIC_APP_ENV || "local",
+
+  /**
    * 是否重定向默认 locale
    *
    * @example `i18n.defaultLocale` is 'en'  `/en/test -> /test`
