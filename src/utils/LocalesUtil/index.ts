@@ -3,39 +3,60 @@ import { isArray, isString } from "lodash";
 
 const { locales, defaultLocale, localUrlReg } = i18nConfig;
 
-function toPath(pathnames: string | string[]): string {
-  const pathanme = isArray(pathnames) ? pathnames.join("/") : pathnames;
-  return pathanme[0] === "/" ? pathanme : "/" + pathanme;
+const PATH_SEPARATOR = "/";
+const separator_reg = /\/+/g;
+
+class Paths {
+  static dropPathSeparator(path: string): string {
+    return path.replace(separator_reg, "");
+  }
+
+  static filterPaths(paths: string[]) {
+    return paths
+      .filter((path) => path !== PATH_SEPARATOR && !!path)
+      .map(Paths.dropPathSeparator);
+  }
+
+  static toPaths(pathnames: string | string[]): string[] {
+    return Paths.filterPaths(
+      isArray(pathnames) ? pathnames : pathnames.split("/"),
+    );
+  }
+
+  static toPath(pathnames: string | string[]): string {
+    const paths = Paths.toPaths(pathnames);
+    return ["", ...paths].join(PATH_SEPARATOR);
+  }
 }
+
 export class LocalesUtil {
   static replaceLocale(pathname: string, value: I18n.Locale) {
-    const paths = pathname.split("/");
+    const paths = pathname.split(PATH_SEPARATOR);
     if (LocalesUtil.isLocalStartPathname(pathname)) {
       if (LocalesUtil.isDefaultLocale(value)) {
-        return toPath(paths.slice(2));
+        return Paths.toPath(paths.slice(2));
       }
-      return toPath([value, ...paths.slice(2)]);
+      return Paths.toPath([value, ...paths.slice(2)]);
     }
 
     if (!LocalesUtil.isDefaultLocale(value)) {
-      return "/".concat(value).concat(pathname);
+      return PATH_SEPARATOR.concat(value).concat(pathname);
     }
     return pathname;
   }
 
   static toHref(pathnames: string | string[], locale?: I18n.Locale): string {
-    locale = LocalesUtil.toLocale(locale);
-    const pathanme = isArray(pathnames) ? pathnames.join("/") : pathnames;
+    const paths = Paths.toPaths(pathnames);
 
-    if (LocalesUtil.isLocalStartPathname(pathanme)) {
-      return pathanme;
+    if (LocalesUtil.isLocale(locale)) {
+      const pLocale = paths[0];
+      if (LocalesUtil.isLocale(pLocale)) {
+        paths.shift();
+      }
+      paths.unshift(locale);
     }
 
-    if (LocalesUtil.isDefaultLocale(locale)) {
-      return toPath(pathanme);
-    }
-
-    return toPath([locale, pathanme]);
+    return Paths.toPath(paths);
   }
 
   static toLocale(lang: string | undefined): I18n.Locale {
@@ -70,7 +91,7 @@ export class LocalesUtil {
    */
   static isLocalStartPathname(pathname: string) {
     for (const locale of locales) {
-      if (pathname.startsWith("/" + locale)) {
+      if (pathname.startsWith(PATH_SEPARATOR + locale)) {
         return true;
       }
     }
@@ -84,7 +105,7 @@ export class LocalesUtil {
    * @returns
    */
   static dropDefaultLocale(path: string) {
-    return path.replace("/" + defaultLocale, "");
+    return path.replace(PATH_SEPARATOR + defaultLocale, "");
   }
 
   static isDefaultLocale(value: any): value is typeof defaultLocale {

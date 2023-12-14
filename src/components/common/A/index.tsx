@@ -1,3 +1,6 @@
+import { useApp } from "@/components/app-provider";
+import { LocalesUtil } from "@/utils";
+import { isString } from "lodash";
 import Link, { LinkProps } from "next/link";
 import { forwardRef, useMemo } from "react";
 
@@ -9,10 +12,6 @@ type BaseLinkProps = Omit<
 
 export type AProps = BaseLinkProps;
 export type HrefType = AProps["href"];
-
-function wrapperHref(href: HrefType) {
-  return href || "#";
-}
 
 /**
  *
@@ -26,10 +25,19 @@ function wrapperHref(href: HrefType) {
  */
 export const A = forwardRef<HTMLAnchorElement, Component.WithChildren<AProps>>(
   (props, ref) => {
-    const { href } = props;
+    const { href, locale } = props;
+    const { lang } = useApp();
     const _href = useMemo(() => {
-      return wrapperHref(href);
-    }, [href]);
+      const _locale = isString(locale) ? (locale as I18n.Locale) : lang;
+      if (isString(href)) {
+        return LocalesUtil.toHref(href, _locale);
+      }
+
+      if (href.pathname) {
+        href.pathname = LocalesUtil.toHref(href.pathname, _locale);
+      }
+      return href;
+    }, [href, lang, locale]);
 
     return (
       <Link {...props} href={_href} ref={ref}>
