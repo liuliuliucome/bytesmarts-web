@@ -53,7 +53,10 @@ export class LocalesUtil {
       if (LocalesUtil.isLocale(pLocale)) {
         paths.shift();
       }
-      paths.unshift(locale);
+
+      if (!LocalesUtil.isDefaultLocale(locale)) {
+        paths.unshift(locale);
+      }
     }
 
     return Paths.toPath(paths);
