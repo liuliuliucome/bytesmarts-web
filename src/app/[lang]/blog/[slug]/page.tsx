@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { BlogsLayout } from "@/components/layouts/BlogsLayout";
 import { BlogsBuilder } from "@/utils/contentlayer/BlogsBuilder";
+import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 
 // export const dynamicParams = false;
 
@@ -45,13 +46,15 @@ export default async function BlogPage(props: Page.BlogsSlugPageProps) {
   }
 
   return (
-    <BlogsLayout
-      breadcrumbs={[]}
-      allDocs={docs}
-      doc={doc}
-      tree={tree}
-      categoryies={categoryies}
-      tags={tags}
-    />
+    <BaseContentLayout lang={props.params.lang}>
+      <BlogsLayout
+        breadcrumbs={[]}
+        allDocs={docs}
+        doc={doc}
+        tree={tree}
+        categoryies={categoryies}
+        tags={tags}
+      />
+    </BaseContentLayout>
   );
 }

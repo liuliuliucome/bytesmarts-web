@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { BlogsIndexLayout } from "@/components/layouts/BlogsLayout/BlogsIndexLayout";
 import { BlogsBuilder } from "@/utils/contentlayer/BlogsBuilder";
+import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 
 // export const dynamicParams = false;
 
@@ -44,15 +45,17 @@ export default async function BlogPage(props: Page.BlogsSlugPageProps) {
     tags.find((item) => item.slug === props.params.slug)?.children || [];
 
   return (
-    <BlogsIndexLayout
-      type="tags"
-      breadcrumbs={[]}
-      allDocs={allDocs}
-      doc={allDocs[0]}
-      tree={[]}
-      categoryies={categoryies}
-      tags={tags}
-      slug={slug}
-    />
+    <BaseContentLayout lang={props.params.lang}>
+      <BlogsIndexLayout
+        type="tags"
+        breadcrumbs={[]}
+        allDocs={allDocs}
+        doc={allDocs[0]}
+        tree={[]}
+        categoryies={categoryies}
+        tags={tags}
+        slug={slug}
+      />
+    </BaseContentLayout>
   );
 }

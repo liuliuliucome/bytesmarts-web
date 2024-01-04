@@ -53,7 +53,7 @@ export class AppStore extends SliceStore<AppStoreState> {
     localStorage.setItem(APP_THEME_STORAGE_KEY, value);
   }
 
-  init(props?: { lang?: I18n.Locale }) {
+  init = (props?: { lang?: I18n.Locale }) => {
     this.setup(() => {
       const theme = this.getDefaultTheme();
       const lang =
@@ -67,14 +67,14 @@ export class AppStore extends SliceStore<AppStoreState> {
       logger("init", theme, lang);
       this.emit(new AppStoreState(theme, lang));
     });
-  }
+  };
 
-  setTheme(value: ThemeValues) {
+  setTheme = (value: ThemeValues) => {
     this.emit(new AppStoreState(value, this.state.lang));
     AppStore.setLocalTheme(value);
-  }
+  };
 
-  setLang(lang: I18n.Locale) {
+  setLang = (lang: I18n.Locale) => {
     this.emit(new AppStoreState(this.state.theme, lang));
-  }
+  };
 }

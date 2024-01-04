@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import { DocsBuilder } from "@/utils/contentlayer/DocsBuilder";
+import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 
 // export const dynamicParams = false;
 
@@ -41,11 +42,13 @@ export default async function DocsPage(props: Page.DocsSlugPageProps) {
   }
 
   return (
-    <DocsLayout
-      // breadcrumbs={breadcrumbs}
-      allDocs={docs}
-      doc={doc}
-      tree={group}
-    />
+    <BaseContentLayout lang={props.params.lang}>
+      <DocsLayout
+        // breadcrumbs={breadcrumbs}
+        allDocs={docs}
+        doc={doc}
+        tree={group}
+      />
+    </BaseContentLayout>
   );
 }

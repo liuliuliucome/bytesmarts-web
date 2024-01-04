@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { allPages } from "contentlayer/generated";
 import { DocsLayout } from "@/components/layouts/DocsLayout";
 import i18nConfig from "config/i18n.config";
 import { DocsBuilder } from "@/utils/contentlayer/DocsBuilder";
+import { BaseContentLayout } from "@/components/layouts/BaseContentLayout";
 
 export async function generateMetadata(props: Page.DocsProps) {
   const builder = new DocsBuilder({ lang: props.params.lang });
@@ -47,6 +47,8 @@ export default async function Docs(props: Page.DocsProps) {
     //   <pre>{JSON.stringify(group, null, 2)}</pre>
     //   <pre>{JSON.stringify(docs, null, 2)}</pre>
     // </div>
-    <DocsLayout breadcrumbs={[]} allDocs={docs} doc={doc} tree={group} />
+    <BaseContentLayout lang={props.params.lang}>
+      <DocsLayout breadcrumbs={[]} allDocs={docs} doc={doc} tree={group} />
+    </BaseContentLayout>
   );
 }

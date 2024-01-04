@@ -36,7 +36,7 @@ export const LangSwitcher = () => {
     (option: LangOption) => {
       const href = LocalesUtil.replaceLocale(pathname, option.value);
       return (
-        <Link href={href}>
+        <Link href={href} className="inline-flex items-center gap-2">
           <IconFont type={option.iconFont} />
           <span>{option.label}</span>
         </Link>
