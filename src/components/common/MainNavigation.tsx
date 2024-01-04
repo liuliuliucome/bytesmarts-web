@@ -91,7 +91,7 @@ export const MainNavigation = () => {
             <span className="-mt-0.5">Bytesmarts-web</span>
           </A>
         </div>
-        <div className="inline-flex lg:hidden">
+        <div className="inline-flex items-center lg:hidden">
           <ColorSchemeSwitcher />
           <LangSwitcher />
           <button
@@ -100,14 +100,12 @@ export const MainNavigation = () => {
             onClick={() => setOpen(!open)}
             className="flex h-8 w-8 items-center justify-end text-text-primary dark:text-slate-300"
           >
-            <span className="inline-block w-4">
-              <IconFont type={open ? "icon-close" : "icon-menu"} />
-            </span>
+            <IconFont type={open ? "icon-close" : "icon-menu"} />
           </button>
           {open && (
             <div className="fixed inset-0 top-[65px] z-50 h-screen bg-gray-950/10 pb-20 backdrop-blur-lg backdrop-filter dark:bg-gray-950/50">
-              <nav className="absolute right-0 h-full divide-y divide-gray-200 border-l border-gray-200 bg-white p-8 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
-                <div className="flex flex-col items-end space-y-2 pb-8">
+              <nav className="absolute right-0 h-full w-52 max-w-full divide-y divide-gray-200 border-l border-gray-200 bg-white p-8 dark:divide-gray-800 dark:border-gray-800 dark:bg-gray-950">
+                <div className="flex flex-col space-y-2 pb-8">
                   {/* <div className="mb-2">
                     <SearchButton showShortcut={false} />
                   </div> */}

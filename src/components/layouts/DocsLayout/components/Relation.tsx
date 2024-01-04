@@ -38,12 +38,12 @@ export function Relation(props: RelationProps) {
           {tags && tags.length ? (
             <div
               data-testid="tags"
-              className="flex w-full flex-wrap gap-1 pt-2 sm:w-auto sm:pt-0"
+              className="flex w-full flex-wrap gap-0.5 pt-2 sm:w-auto sm:pt-0"
             >
               {mapChildren(tags, ({ item, key }) => (
                 <span
                   key={key}
-                  className="shadow-[inset 0 0 0 1px #444d56] inline-flex items-center rounded-xl bg-[#24292e] px-1.5 py-px text-12 text-[#bebebe]"
+                  className="inline-flex items-center rounded-xl px-1.5 py-px text-12 shadow-[inset_0_0_0_1px_#444d56] dark:bg-[#24292e] dark:text-[#bebebe]"
                 >
                   {isString(item.icon) ? (
                     <IconFont className="mr-1" type={item.icon as any} />
