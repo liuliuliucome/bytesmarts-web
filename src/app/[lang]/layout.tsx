@@ -31,7 +31,7 @@ export default function RootLayout(props: RootLayoutProps) {
       <body>
         <BaseContentLayout lang={lang}>{children}</BaseContentLayout>
         {/* FIXME: 在现有版本中， build 后 next 会将自动创建的 script 标签去掉，道中 iconfont.js 无法被加载， 且需要是最后一个script  */}
-        <Script id="iconfont-id" src={iconFontJson.js} />
+        {/* <Script id="iconfont-id" src={iconFontJson.js} /> */}
       </body>
     </html>
   );

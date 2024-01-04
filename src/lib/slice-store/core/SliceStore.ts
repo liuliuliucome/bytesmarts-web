@@ -10,10 +10,10 @@ export class SliceStore<T> extends Observer<T> {
     this.state = initState();
   }
 
-  setDefaultState = once((value: T) => {
+  setDefaultState = (value: T) => {
     this.state = value;
     return this;
-  });
+  };
 
   setup = (fn: any) => {
     if (this.mounted) {
