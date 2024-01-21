@@ -18,7 +18,7 @@ export async function generateMetadata(
 
   return {
     title: doc.seoTitle || doc.title,
-    description: doc.seoDescription || doc.description,
+    description: doc.seoDescription || doc.description || doc.title,
   };
 }
 

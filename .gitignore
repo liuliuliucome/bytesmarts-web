@@ -39,7 +39,6 @@ package-lock.json
 yarn.lock
 .husky
 
-public/robots.txt
 public/sitemap*.xml
 .contentlayer
 /test-results/

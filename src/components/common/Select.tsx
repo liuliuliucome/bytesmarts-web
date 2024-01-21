@@ -38,7 +38,10 @@ export function Select<V, Option extends BaseOption<V>>(
 
   return (
     <DropdownMenu.Root onOpenChange={fixScrollPadding}>
-      <DropdownMenu.Trigger className="flex h-8 items-center rounded-md bg-transparent px-3 text-text-primary  hover:bg-gray-50 hover:text-slate-500 dark:text-slate-500 dark:hover:bg-gray-900 dark:hover:text-slate-400">
+      <DropdownMenu.Trigger
+        aria-label="select-trigger"
+        className="flex h-8 items-center rounded-md bg-transparent px-3 text-text-primary  hover:bg-gray-50 hover:text-slate-500 dark:text-slate-500 dark:hover:bg-gray-900 dark:hover:text-slate-400"
+      >
         {children}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content className="z-100 rounded-md border border-gray-100 bg-gray-50 p-2 dark:border-gray-800 dark:bg-gray-900">

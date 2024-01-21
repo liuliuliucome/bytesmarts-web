@@ -19,7 +19,7 @@ export async function generateMetadata(props: Page.DocsProps) {
 
   return {
     title: page.seoTitle || page.title,
-    description: page.seoDescription || page.description,
+    description: page.seoDescription || page.description || page.title,
   };
 }
 

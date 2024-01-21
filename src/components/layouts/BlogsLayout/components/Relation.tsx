@@ -31,7 +31,7 @@ export function Relation(props: RelationProps) {
         />
         <div>
           <A href={link} className="underline hover:no-underline">
-            <h5>{title}</h5>
+            <h3>{title}</h3>
           </A>
 
           {tags && tags.length ? (
